@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>JEE Formula Hunter Pro</title>
+<title>JEE Formula Hunt</title>
 <style>
 body{margin:0;background:#0f172a;color:#fff;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;overflow:hidden;user-select:none;}
 #top{height:100px;background:#111827;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #1f2937;}
@@ -33,6 +33,15 @@ select:hover, button:hover {background:#334155;}
 #hintBtn:hover {background:#f59e0b;}
 #qrcBtn {background:#059669;border:none;font-weight:bold;}
 #qrcBtn:hover {background:#10b981;}
+#restartBtn{
+    background:#dc2626;
+    border:none;
+    font-weight:bold;
+}
+
+#restartBtn:hover{
+    background:#ef4444;
+}
 
 #arena{position:relative;height:calc(100vh - 120px);overflow:hidden;background:radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);}
 .formula{position:absolute;padding:10px 16px;border-radius:12px;font-weight:bold;font-size:16px;cursor:pointer;background:rgba(15, 23, 42, 0.6);backdrop-filter:blur(4px);box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);transition:transform 0.1s ease, border 0.2s ease, box-shadow 0.2s ease;white-space:nowrap;}
@@ -77,29 +86,39 @@ select:hover, button:hover {background:#334155;}
 <div id="question" class="flashing">Press Start to Hunt!</div>
 <div id="progressWrap"><div id="progress"></div></div>
 </div>
+
 <div id="controls">
 <div class="btn-group">
 <select id="level">
-<option value="MHCET">MHCET (Speed)</option>
-<option value="JEE" selected>JEE Main</option>
-<option value="Advanced">JEE Advanced</option>
+<option value="Beginner">Beginner</option>
+<option value="Intermediate">Intermediate</option>
+<option value="Advanced">Advanced</option>
 </select>
+
 <select id="subject">
 <option value="All">All Subjects</option>
 <option value="Physics">Physics</option>
 <option value="Chemistry">Chemistry</option>
 <option value="Maths">Maths</option>
 </select>
+<select id="topic">
+<option value="All">All Topics</option>
+</select>
 <button id="startBtn">Start Game</button>
-<button id="hintBtn">Hint (-50)</button>
+<button id="restartBtn">Restart</button>
+<button id="hintBtn">Hint (-30)</button>
 <button id="skipBtn">Skip (-10)</button>
-<button id="qrcBtn">Formula Directory (QRC)</button>
+
+<button onclick="window.location.href='formulae.html'">
+    📚 Formula Directory
+</button>
 </div>
 <div class="stats-row">
 Score: <span id="score">0</span> |
 Combo: <span id="combo">0</span> |
 Skipped: <span id="skipped">0</span> |
 Progress: <span id="done">0/0</span>
+Lives:<span id="lives">❤️❤️❤️</span>
 </div>
 </div>
 </div>
@@ -121,6 +140,54 @@ Progress: <span id="done">0/0</span>
   <div id="qrc-maths" class="qrc-grid"></div>
 </div>
 
+<div id="gameOverModal" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+z-index:20000;
+justify-content:center;
+align-items:center;
+">
+
+    <div style="
+    background:#1e293b;
+    padding:30px;
+    border-radius:15px;
+    min-width:350px;
+    text-align:center;
+    border:2px solid #ef4444;
+    ">
+
+        <h1 style="color:#ef4444;">
+            💀 Game Over
+        </h1>
+
+        <div id="gameOverStats"
+             style="font-size:18px;line-height:1.8;">
+        </div>
+
+        <button id="playAgainBtn"
+                style="
+                margin-top:20px;
+                padding:10px 20px;
+                background:#2563eb;
+                border:none;
+                border-radius:8px;
+                color:white;
+                font-weight:bold;">
+            Play Again
+        </button>
+
+    </div>
+
+</div>
+
+<script src="data.js"></script>
+
 <script>
 window.switchTab = function(e, tabId) {
   document.querySelectorAll('.qrc-grid').forEach(grid => grid.classList.remove('active'));
@@ -129,98 +196,24 @@ window.switchTab = function(e, tabId) {
   if (e && e.currentTarget) e.currentTarget.classList.add('active');
 };
 
+
 window.addEventListener('DOMContentLoaded', () => {
   const praise=["Well Done!","Awesome!","Great!","Excellent!","Superb!","Brilliant!","Keep Going!","Genius!","Unstoppable!"];
   const colors=["#ff6b6b","#4ecdc4","#ffe66d","#74b9ff","#fd79a8","#55efc4","#a29bfe","#feca57","#ff9ff3","#00d2d3"];
 
-  // Core High-Yield Formula Bank covering Physics, Chemistry, and Mathematics across MHCET, JEE Main, and JEE Advanced
-  const bank = [
-    // ==========================================
-    // --- PHYSICS (24 Formulas) ---
-    // ==========================================
-    {subject:"Physics", level:["MHCET","JEE","Advanced"], q:"De Broglie Wavelength", a:"λ = h / p", d:"Relates the wave nature of a particle to its momentum. h is Planck's constant, p is momentum (m × v)."},
-    {subject:"Physics", level:["MHCET","JEE"], q:"Bohr Radius of nth orbit", a:"r = a₀ × n² / Z", d:"Determines orbit radii of hydrogen-like species. a₀ = 0.529 Å, n is principal quantum number, Z is atomic number."},
-    {subject:"Physics", level:["JEE","Advanced"], q:"Total Energy of electron in Bohr Orbit", a:"E = -13.6 × Z² / n² eV", d:"The electrostatic bound energy of an electron. Negative sign denotes attractive binding potential."},
-    {subject:"Physics", level:["MHCET","JEE","Advanced"], q:"Capacitance of a Parallel Plate Capacitor", a:"C = ε₀A / d", d:"Capacitance in vacuum. A is shared surface area of the plates, d is the separation distance between them."},
-    {subject:"Physics", level:["MHCET","JEE"], q:"Energy stored in an Inductor", a:"U = ½ L I²", d:"Magnetic potential energy stored within the inductor's magnetic fields when a current I passes through coefficient L."},
-    {subject:"Physics", level:["MHCET","JEE","Advanced"], q:"Resonant Frequency in LCR Circuit", a:"f = 1 / (2π√LC)", d:"The frequency at which inductive reactance perfectly cancels capacitive reactance, maximizing total current output."},
-    {subject:"Physics", level:["JEE","Advanced"], q:"Lens Maker's Formula", a:"1/f = (μ-1)(1/R₁ - 1/R₂)", d:"Computes focal length of thin optical lenses based on refractive indices (μ) and surface radii of curvatures."},
-    {subject:"Physics", level:["MHCET","JEE"], q:"Brewster's Law (Polarization)", a:"μ = tan(i_p)", d:"When unpolarized light hits a boundary at angle i_p, the reflected components become fully polarized perpendicular to the plane."},
-    {subject:"Physics", level:["JEE","Advanced"], q:"Stefan-Boltzmann Law", a:"E = σ A T⁴", d:"Total radiant energy emitted per unit time from blackbodies. σ is the constant, T is thermodynamic absolute temperature."},
-    {subject:"Physics", level:["MHCET","JEE"], q:"Root Mean Square (RMS) Velocity of Gas", a:"v_rms = √(3RT / M)", d:"Represents the average speed of gas molecules. Directly proportional to square root of temperature and inverse to molecular mass."},
-    {subject:"Physics", level:["Advanced"], q:"Work Done in Isothermal Process", a:"W = nRT ln(V₂/V₁)", d:"The thermal energy calculation when an ideal gas transforms under constant temperature environments."},
-    {subject:"Physics", level:["MHCET","JEE","Advanced"], q:"Escape Velocity from Planet Surface", a:"v_e = √(2GM / R)", d:"Minimum initial speed required for an unpropelled body to cleanly break free from a primary body's gravitational field."},
-    {subject:"Physics", level:["JEE","Advanced"], q:"Terminal Velocity in Viscous Fluid", a:"v_t = 2r²(ρ-σ)g / 9η", d:"Steady speed reached by an object dropping through liquid columns. η is viscosity coefficient, ρ & σ are structural mass densities."},
-    {subject:"Physics", level:["Advanced"], q:"Bernoulli's Equation", a:"P + ½ρv² + ρgh = constant", d:"Statement of the conservation of mechanical energy principle applied cleanly to stream tubes of ideal, moving non-viscous fluids."},
-    {subject:"Physics", level:["MHCET","JEE"], q:"Electrostatic Potential of Point Charge", a:"V = q / (4πε₀r)", d:"Work required to bring a unit positive charge from infinity to distance r in an electric field."},
-    {subject:"Physics", level:["JEE","Advanced"], q:"Magnetic Field at Center of Circular Loop", a:"B = μ₀I / (2R)", d:"Computes the magnetic field vector at the geometric center of a flat wire ring carrying steady state current I."},
-    {subject:"Physics", level:["MHCET","JEE","Advanced"], q:"Torque on a Magnetic Dipole", a:"τ = M × B sin(θ)", d:"Rotational force felt by a loop with magnetic moment M inside a uniform external magnetic field B."},
-    {subject:"Physics", level:["Advanced"], q:"Fringe Width in Young's Double Slit", a:"β = λD / d", d:"Distance between consecutive bright or dark fringes on an observing screen placed at distance D."},
-    {subject:"Physics", level:["MHCET","JEE"], q:"Velocity of Transverse Wave on a String", a:"v = √(T / μ)", d:"Speed of a wave down a stretched wire under tension force T. μ represents linear mass density."},
-    {subject:"Physics", level:["JEE","Advanced"], q:"Einstein's Photoelectric Equation", a:"K_max = hν - φ", d:"Conservation of energy for photoelectrons. hν is incident photon energy, φ is the metallic surface work function."},
-    {subject:"Physics", level:["MHCET","JEE"], q:"Time Period of a Simple Pendulum", a:"T = 2π√(L / g)", d:"Period for small angular oscillations. Totally independent of the bob mass under ideal constraint setups."},
-    {subject:"Physics", level:["JEE","Advanced"], q:"Radius of Gyration", a:"k = √(I / M)", d:"Radial distance from an axis where the entire mass of a body could be concentrated without altering its moment of inertia I."},
-    {subject:"Physics", level:["Advanced"], q:"Ampere's Maxwell Circuital Law", a:"∮B·dl = μ₀(I + I_d)", d:"Unifies classic magnetic circulation loops with displacement current I_d generated by dynamic shifting electric fluxes."},
-    {subject:"Physics", level:["MHCET","JEE","Advanced"], q:"Instantaneous Power", a:"P = F · v", d:"The dot product of force and velocity vectors representing instantaneous mechanical power transformation rates."},
+  
 
-    // ==========================================
-    // --- CHEMISTRY (24 Formulas) ---
-    // ==========================================
-    {subject:"Chemistry", level:["MHCET","JEE"], q:"Ideal Gas Equation", a:"P V = n R T", d:"Equation of state for hypothetical ideal systems. Connects pressure (P), volume (V), moles (n), and absolute temperatures (T)."},
-    {subject:"Chemistry", level:["JEE","Advanced"], q:"Van der Waals Real Gas Equation", a:"(P + an²/V²)(V - nb) = nRT", d:"Accountability correction parameters for real gases. 'a' measures intermolecular attractions, 'b' accounts for molecular co-volume configurations."},
-    {subject:"Chemistry", level:["MHCET","JEE","Advanced"], q:"Arrhenius Equation (Rate Constant)", a:"k = A e^(-E_a / RT)", d:"Defines reaction rates dependencies on activation thresholds E_a and thermal kinetic fluctuations."},
-    {subject:"Chemistry", level:["JEE","Advanced"], q:"Nernst Equation (Cell Potential)", a:"E = E° - (RT/nF) ln Q", d:"Quantifies exact cell electromotive force values under non-standard structural conditions. Q represents reaction quotients."},
-    {subject:"Chemistry", level:["JEE","Advanced"], q:"Gibbs Free Energy and Equilibrium", a:"ΔG° = -R T ln K", d:"Thermodynamic equilibrium bridge parameter. If standard delta G change drops below zero, K equilibrium is highly favorable."},
-    {subject:"Chemistry", level:["MHCET","JEE"], q:"Henry's Law of Gas Solubility", a:"p = K_H × x", d:"States that the amount of dissolved gas in a liquid is directly proportional to the partial pressure of that gas above the liquid."},
-    {subject:"Chemistry", level:["MHCET","JEE","Advanced"], q:"Elevation in Boiling Point", a:"ΔT_b = i × K_b × m", d:"Colligative asset changes. i is van 't Hoff factor, K_b represents ebullioscopic constant constants, m signifies molality concentration."},
-    {subject:"Chemistry", level:["MHCET","JEE"], q:"Osmotic Pressure of a Solution", a:"π = i C R T", d:"Hydrostatic metric limit to prevent solvent inflows. C is molar concentration profile values."},
-    {subject:"Chemistry", level:["JEE","Advanced"], q:"Bragg's Law of X-ray Diffraction", a:"n λ = 2d sin θ", d:"Explains target crystalline reflections. d equals atom layer distances, θ values state incidence wave reflection alignments."},
-    {subject:"Chemistry", level:["MHCET","JEE","Advanced"], q:"Rate Law for a First Order Reaction", a:"kt = ln(A₀ / A_t)", d:"Integrated mathematical calculation tracking dynamic species depletion paths across timelines in 1st order kinetic pools."},
-    {subject:"Chemistry", level:["MHCET","JEE"], q:"Half-Life of a First Order Reaction", a:"t_½ = 0.693 / k", d:"Time interval parameters to deplete exactly half of original reactants. Completely independent of initial starting load levels (A₀)."},
-    {subject:"Chemistry", level:["Advanced"], q:"Buffer pH (Henderson-Hasselbalch)", a:"pH = pK_a + log([Salt]/[Acid])", d:"Predictive logarithmic equation tracking equilibrium pH shifts inside common-ion buffered media systems."},
-    {subject:"Chemistry", level:["JEE","Advanced"], q:"Solubility Product of a Salt (A₂B)", a:"K_sp = 4s³", d:"Saturated ionic product solubility limits calculations for salts dissociating into three free molar structural units."},
-    {subject:"Chemistry", level:["MHCET","JEE"], q:"Molarity Formula", a:"M = n_solute / V_solution(L)", d:"Concentration parameter calculating the moles of solute dissolved per net liter volume of solution."},
-    {subject:"Chemistry", level:["JEE","Advanced"], q:"Specific Conductance (Kappa)", a:"κ = (1 / ρ) = (1 / R) × (l / A)", d:"Measures the electrical conductivity of an electrolytic medium. l/A represents the cell constant metric."},
-    {subject:"Chemistry", level:["MHCET","JEE","Advanced"], q:"Faraday's First Law of Electrolysis", a:"W = Z × I × t", d:"Mass of substance liberated at an electrode is directly proportional to the total electric charge passed through the cell."},
-    {subject:"Chemistry", level:["Advanced"], q:"Entropy Change for Ideal Gas Expansion", a:"ΔS = nR ln(V₂/V₁) + nC_v ln(T₂/T₁)", d:"Evaluates total thermodynamic spatial disorder transitions across coupled chemical temperature and volume variations."},
-    {subject:"Chemistry", level:["MHCET","JEE"], q:"Empirical Formula Molar Link", a:"Molecular Formula = n × Empirical Formula", d:"Relates basic empirical constituent ratio blocks to true macro-molecular identity matrices using scale integer n."},
-    {subject:"Chemistry", level:["JEE","Advanced"], q:"Heisenberg Uncertainty Principle", a:"Δx × Δp ≥ h / (4π)", d:"Quantum barrier setting an absolute limit on simultaneously measuring both particle position and momentum states precisely."},
-    {subject:"Chemistry", level:["Advanced"], q:"Degree of Dissociation (Ostwald Dilution)", a:"α = √(K_a / C)", d:"Calculates weak electrolyte equilibrium breakdowns valid exclusively if dissociation level α scales far lower than 1."},
-    {subject:"Chemistry", level:["MHCET","JEE"], q:"Normality and Molarity Link", a:"Normality = Molarity × n-factor", d:"Bridging equation converting standard molar volume concentration profiles to reactivity equivalent scales via valence n-factor equivalents."},
-    {subject:"Chemistry", level:["JEE","Advanced"], q:"Depression of Freezing Point", a:"ΔT_f = i × K_f × m", d:"Colligative breakdown parameter mapping freezing limits lowering. K_f is the cryoscopic constant, m is solution molality."},
-    {subject:"Chemistry", level:["Advanced"], q:"Gibbs Helmholtz Equation", a:"ΔG = ΔH - TΔS", d:"Predicts absolute spontaneity of reactions at constant pressure. Spontaneous transformations require delta G to drop below zero."},
-    {subject:"Chemistry", level:["MHCET","JEE","Advanced"], q:"Mole Fraction Relation", a:"x_A + x_B = 1", d:"Fundamental boundary axiom dictating that the summation of all fractional constituent parts in a chemical mixture equals exactly unity."},
-
-    // ==========================================
-    // --- MATHEMATICS (24 Formulas) ---
-    // ==========================================
-    {subject:"Maths", level:["MHCET","JEE","Advanced"], q:"Euler's Identity Formula", a:"e^(iπ) + 1 = 0", d:"Fundamental link displaying deep connections between five core mathematical units (e, i, pi, 1, and 0)."},
-    {subject:"Maths", level:["MHCET","JEE"], q:"Roots of a Quadratic Equation", a:"x = [-b ± √(b²-4ac)] / 2a", d:"The standard solutions for finding roots of any real variable parabolic system mapped as Ax² + Bx + C = 0."},
-    {subject:"Maths", level:["MHCET","JEE"], q:"Sum of an Infinite Geometric Progression", a:"S_∞ = a / (1 - r)", d:"Converging infinite summation limit value valid exclusively if the absolute ratio profile scaling parameter |r| drops below 1."},
-    {subject:"Maths", level:["JEE","Advanced"], q:"General Term of a Binomial Expansion", a:"T_(r+1) = ⁿC_r a^(n-r) b^r", d:"Finds specific individual indices locations inside complex expanded algebraic polynomial combinations setups."},
-    {subject:"Maths", level:["MHCET","JEE","Advanced"], q:"Distance from Point to Line", a:"d = |Ax₀+By₀+C| / √(A²+B²)", d:"Calculates shortest orthogonal geometric lengths separation distance between point coordinates and continuous linear tracks vectors."},
-    {subject:"Maths", level:["MHCET","JEE"], q:"Eccentricity of an Ellipse (a > b)", a:"e = √(1 - b²/a²)", d:"Defines the flat stretching ratio measurements mapping how far an elliptical path deviates from perfect circular configurations."},
-    {subject:"Maths", level:["JEE","Advanced"], q:"Angle between two straight Lines", a:"tan θ = |(m₁-m₂)/(1+m₁m₂)|", d:"Computes intersecting angular metrics formed between two individual line segments possessing slopes m₁ and m₂."},
-    {subject:"Maths", level:["Advanced"], q:"Condition for Orthogonal Circles", a:"2g₁g₂ + 2f₁f₂ = c₁ + c₂", d:"Geometric validation constraint confirming two circular boundaries cross perpendicular intersections everywhere."},
-    {subject:"Maths", level:["MHCET","JEE"], q:"Integration of tan(x)", a:"∫tan x dx = ln|sec x| + C", d:"Standard calculus logarithmic antiderivative answer tracking evaluation regions underneath trigonometric tangent parameters."},
-    {subject:"Maths", level:["JEE","Advanced"], q:"Integration by Parts Rule", a:"∫u dv = uv - ∫v du", d:"Core operational tool reversing the differentiation product rules formulas for pairs of blended dynamic product elements."},
-    {subject:"Maths", level:["MHCET","JEE","Advanced"], q:"Derivative of sec(x)", a:"d/dx(sec x) = sec x tan x", d:"Rate of change configuration representing trigonometric secant functions across linear mathematical domains."},
-    {subject:"Maths", level:["Advanced"], q:"Shortest Distance between skew lines", a:"d = |(a₂-a₁) · (b₁×b₂)| / |b₁×b₂|", d:"Evaluates minimum absolute spatial separations spacing between non-intersecting non-parallel lines mapped in three dimensions."},
-    {subject:"Maths", level:["JEE","Advanced"], q:"Bayes' Theorem Probability", a:"P(A|B) = P(B|A)P(A) / P(B)", d:"Calculates conditional updates probabilities for structural events tracking conditions given observations historical evidence criteria data."},
-    {subject:"Maths", level:["JEE","Advanced"], q:"De Moivre's Theorem Properties", a:"(cos θ + i sin θ)ⁿ = cos nθ + i sin nθ", d:"Connects complex number geometry maps smoothly to standard trigonometric angular multiplier calculation parameters."},
-    {subject:"Maths", level:["MHCET","JEE"], q:"Section Formula (Internal)", a:"r = (m·b + n·a) / (m + n)", d:"Determines internal coordinate position vectors splitting connecting straight line frameworks into specific scalar ratios m:n."},
-    {subject:"Maths", level:["JEE","Advanced"], q:"Area of Triangle in Vector Form", a:"Area = ½ |a × b|", d:"Evaluates exact spatial surface regions bounded inside triangular limits using half the cross product magnitude of adjacent vectors."},
-    {subject:"Maths", level:["MHCET","JEE","Advanced"], q:"Cos(2θ) Double Angle Expansion", a:"cos(2θ) = cos²θ - sin²θ", d:"Core trigonometric standard expansion rule used to compress high degree polynomial terms inside calculus evaluations."},
-    {subject:"Maths", level:["Advanced"], q:"Leibniz Rule (Differentiation under Integral)", a:"d/dx[∫_{u(x)}^{v(x)} f(t)dt] = f(v(x))v'(x) - f(u(x))u'(x)", d:"Calculates structural differentiation changes passing tracking bounds directly affected by changing variables."},
-    {subject:"Maths", level:["MHCET","JEE"], q:"Permutations of Objects Formula", a:"ⁿP_r = n! / (n - r)!", d:"Calculates total sequential arrangement arrays counting exact subsets taken out from bigger distinct item pools."},
-    {subject:"Maths", level:["JEE","Advanced"], q:"Distance of Point from a Plane", a:"d = |ax₀ + by₀ + cz₀ + d| / √(a² + b² + c²)", d:"Orthogonal length extraction computing true separation from 3D coordinates down onto flat matrix surfaces."},
-    {subject:"Maths", level:["Advanced"], q:"Standard Limit for sin(x)/x", a:"lim_{x→0} (sin x / x) = 1", d:"Trigonometric foundational limit used to solve complex indeterminate calculus boundaries seamlessly via scaling approximations."},
-    {subject:"Maths", level:["MHCET","JEE"], q:"Slope of Normal to Curve", a:"m_normal = -1 / (dy/dx)", d:"Perpendicular geometric line evaluation calculating direct trajectory angles working inverse to native system derivatives."},
-    {subject:"Maths", level:["JEE","Advanced"], q:"Matrix Inverse Condition", a:"A⁻¹ = adj(A) / |A|", d:"Linear algebra inversion operational requirement tracking target criteria valid exclusively if determinant |A| does not hit zero."},
-    {subject:"Maths", level:["MHCET","JEE","Advanced"], q:"Variance of a Data Set", a:"σ² = Σ(x_i - μ)² / N", d:"Statistical dispersion metric aggregating squared deviations of individual data fields against the absolute population mean value μ."}
-  ];
-
-  let current=0, score=0, combo=0, skippedCount=0, pool=[], gameActive=false, velocityMultiplier=1.0, levelScoreFactor=1.0;
+  let current=0,
+	solved=0,
+    score=0,
+    combo=0,
+	lives=3,
+    skippedCount=0,
+    pool=[],
+    gameActive=false,
+    gamePaused=false,
+    velocityMultiplier=1.0,
+    levelScoreFactor=1.0;
   const maxVisible = 20;
 
   const arena = document.getElementById("arena");
@@ -230,13 +223,57 @@ window.addEventListener('DOMContentLoaded', () => {
   const question = document.getElementById("question");
   const progress = document.getElementById("progress");
   const done = document.getElementById("done");
+  const topicSelect = document.getElementById("topic");
   const startBtn = document.getElementById("startBtn");
+  const restartBtn = document.getElementById("restartBtn");
   const skipBtn = document.getElementById("skipBtn");
   const hintBtn = document.getElementById("hintBtn");
   const qrcBtn = document.getElementById("qrcBtn");
   const closeQrcBtn = document.getElementById("closeQrcBtn");
   const qrcModal = document.getElementById("qrcModal");
+  const gameOverModal =
+document.getElementById("gameOverModal");
 
+const gameOverStats =
+document.getElementById("gameOverStats");
+
+const playAgainBtn =
+document.getElementById("playAgainBtn");
+  
+  function updateTopics() {
+
+    const subject =
+        document.getElementById("subject").value;
+
+    topicSelect.innerHTML =
+        '<option value="All">All Topics</option>';
+
+    if(subject === "All")
+        return;
+
+    const topics = new Set();
+
+    bank.forEach(item => {
+
+        if(item.subject === subject)
+            topics.add(item.topic);
+
+    });
+
+    [...topics]
+        .forEach(topic => {
+
+            const option =
+                document.createElement("option");
+
+            option.value = topic;
+            option.textContent = topic;
+
+            topicSelect.appendChild(option);
+        });
+}
+  
+ 
   function buildQrcDirectory() {
     const physDiv = document.getElementById("qrc-physics");
     const chemDiv = document.getElementById("qrc-chemistry");
@@ -247,7 +284,7 @@ window.addEventListener('DOMContentLoaded', () => {
       card.className = "qrc-card";
       card.innerHTML = `
         <div class="qrc-q">${item.q}</div>
-        <div class="qrc-tag">${item.level.join(', ')}</div>
+        <div class="qrc-tag">${item.level}</div>
         <div class="qrc-a">${escapeHtml(item.a)}</div>
         <div class="qrc-d">${item.d}</div>
       `;
@@ -297,6 +334,20 @@ window.addEventListener('DOMContentLoaded', () => {
       if (step >= 1) { clearInterval(t); d.remove(); }
     }, 20);
   }
+  
+  function updateLivesDisplay(){
+
+    const livesEl = document.getElementById("lives");
+
+    if(lives === 3)
+        livesEl.innerText = "❤️❤️❤️";
+    else if(lives === 2)
+        livesEl.innerText = "❤️❤️";
+    else if(lives === 1)
+        livesEl.innerText = "❤️";
+    else
+        livesEl.innerText = "💀";
+}
 
   function spawnFormula(item) {
     if (!item) return;
@@ -321,7 +372,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function startGame() {
     arena.innerHTML = "";
-    score = 0; combo = 0; current = 0; skippedCount = 0;
+    score = 0;
+combo = 0;
+current = 0;
+solved = 0;
+done.innerText = "0/0";
+progress.style.width = "0%";
+skippedCount = 0;
+lives = 3;
+
+updateLivesDisplay();
     
     if(scoreEl) scoreEl.innerText = score;
     if(comboEl) comboEl.innerText = combo;
@@ -330,23 +390,44 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const chosenLevel = document.getElementById("level").value;
     const chosenSub = document.getElementById("subject").value;
+	const chosenTopic = document.getElementById("topic").value;
 
-    if (chosenLevel === "MHCET") {
-      velocityMultiplier = 0.8;
-      levelScoreFactor = 0.8;
-    } else if (chosenLevel === "JEE") {
-      velocityMultiplier = 1.3;
-      levelScoreFactor = 1.0;
-    } else { 
-      velocityMultiplier = 2.1; 
-      levelScoreFactor = 1.6;
-    }
+    if (chosenLevel === "Beginner") {
+	velocityMultiplier = 0.8;
+	levelScoreFactor = 0.8;
+	}
+	else if (chosenLevel === "Intermediate") {
+	velocityMultiplier = 1.3;
+	levelScoreFactor = 1.0;
+	}
+	else if (chosenLevel === "Advanced") {
+	velocityMultiplier = 2.1;
+	levelScoreFactor = 1.6;
+	}
+	else {
+	velocityMultiplier = 1.3;
+	levelScoreFactor = 1.0;
+	}
     
     pool = bank.filter(x => {
-      const matchSub = (chosenSub === "All" || x.subject === chosenSub);
-      const matchLevel = x.level.includes(chosenLevel);
-      return matchSub && matchLevel;
-    });
+
+    const matchSub =
+        chosenSub === "All" ||
+        x.subject === chosenSub;
+
+    const matchLevel =
+        x.level.includes(chosenLevel);
+
+    const matchTopic =
+        chosenTopic === "All" ||
+        x.topic === chosenTopic;
+
+    return (
+        matchSub &&
+        matchLevel &&
+        matchTopic
+    );
+});
 
     pool = pool.sort(() => Math.random() - 0.5);
 
@@ -371,19 +452,20 @@ window.addEventListener('DOMContentLoaded', () => {
       question.innerHTML = "🏆 Formula Hunt Complete!";
       question.style.color = "#00ff66";
       progress.style.width = "100%";
-      done.innerText = pool.length + "/" + pool.length;
+      done.innerText = solved + "/" + pool.length;
       gameActive = false;
       return;
     }
     
     question.innerHTML = `<span style="font-size:12px; text-transform:uppercase; letter-spacing:1px; opacity:0.75; color:#94a3b8;">[${pool[current].subject} - ${document.getElementById("level").value}]</span><br>${pool[current].q}`;
     question.style.color = colors[Math.floor(Math.random() * colors.length)];
-    done.innerText = current + "/" + pool.length;
-    progress.style.width = ((current / pool.length) * 100) + "%";
+    done.innerText = solved + "/" + pool.length;
+    progress.style.width = ((solved / pool.length) * 100) + "%";
   }
 
   function handleClick(ev, el) {
-    if(!gameActive || current >= pool.length) return;
+    if(!gameActive || gamePaused || current >= pool.length)
+    return;
     const correct = pool[current].a;
 
     if (el.dataset.answer === correct) {
@@ -402,10 +484,18 @@ window.addEventListener('DOMContentLoaded', () => {
         spawnFormula(pool[nextIndex]);
       }
 
-      current++;
+      solved++;
+	  current++;
+
       nextQuestion();
     } else {
       score = Math.max(0, score - Math.round(25 * levelScoreFactor));
+	  lives--;
+
+updateLivesDisplay();
+	if(lives <= 0){
+    gameOver();
+    }
       combo = 0;
       play(300, 120, 0.25);
       popup("-" + Math.round(25 * levelScoreFactor), ev.clientX, ev.clientY, "#ef4444");
@@ -416,7 +506,8 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function skipQuestion() {
-    if(!gameActive || current >= pool.length || !question) return;
+    if(!gameActive || gamePaused || current >= pool.length || !question)
+    return;
 
     const pBox = document.createElement("div");
     pBox.className = "skip-pop";
@@ -428,7 +519,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     play(400, 150, 0.2);
 
-    score = Math.max(0, score - Math.round(10 * levelScoreFactor));
+    score = Math.max(0, score - 10);
     combo = 0;
     skippedCount++;
     
@@ -449,12 +540,14 @@ window.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    current++;
+    
+	current++;
     nextQuestion();
   }
 
   function triggerHint() {
-    if(!gameActive || current >= pool.length) return;
+    if(!gameActive || gamePaused || current >= pool.length || !question)
+    return;
     
     const correctAns = pool[current].a;
     const targets = document.querySelectorAll(".formula");
@@ -468,7 +561,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     if(targetElement && !targetElement.classList.contains("hint-target")) {
-      score = Math.max(0, score - Math.round(50 * levelScoreFactor));
+      score = Math.max(0, score - 30);
       if(scoreEl) scoreEl.innerText = score;
       play(600, 800, 0.12);
 
@@ -478,12 +571,91 @@ window.addEventListener('DOMContentLoaded', () => {
       }, 2500);
     }
   }
+  
+  function resetGame(){
+
+    arena.innerHTML = "";
+
+    current = 0;
+    solved = 0;
+    score = 0;
+    combo = 0;
+    skippedCount = 0;
+    lives = 3;
+
+    gameActive = false;
+    gamePaused = false;
+
+    updateLivesDisplay();
+
+    scoreEl.innerText = "0";
+    comboEl.innerText = "0";
+    skippedEl.innerText = "0";
+
+    progress.style.width = "0%";
+    done.innerText = "0/0";
+
+    question.innerHTML = "Press Start to Hunt!";
+
+    startBtn.textContent = "Start Game";
+
+    gameOverModal.style.display = "none";
+}
+
+function restartGame(){
+
+    if(!confirm(
+        "Restart game?\n\nCurrent progress will be lost."
+    )){
+        return;
+    }
+
+    resetGame();
+}
+
+function gameOver(){
+
+    gameActive = false;
+    gamePaused = false;
+
+    arena.innerHTML = "";
+
+    gameOverStats.innerHTML = `
+        Score: <b>${score}</b><br>
+        Solved: <b>${solved}</b><br>
+        Skipped: <b>${skippedCount}</b><br>
+        Combo: <b>${combo}</b>
+    `;
+
+    gameOverModal.style.display = "flex";
+
+    startBtn.textContent = "Start Game";
+	if(playAgainBtn){
+
+    playAgainBtn.addEventListener(
+        "click",
+        () => {
+
+            gameOverModal.style.display =
+                "none";
+
+            resetGame();
+
+        }
+    );
+
+}
+}
 
   function animate() {
     const elements = document.querySelectorAll(".formula");
     const arenaWidth = arena.clientWidth;
     const arenaHeight = arena.clientHeight;
-
+	
+	if(gamePaused){
+    requestAnimationFrame(animate);
+    return;
+}
     elements.forEach(el => {
       let x = parseFloat(el.style.left) || 0;
       let y = parseFloat(el.style.top) || 0;
@@ -506,12 +678,52 @@ window.addEventListener('DOMContentLoaded', () => {
   if (qrcBtn) qrcBtn.addEventListener('click', () => { qrcModal.style.display = "block"; });
   if (closeQrcBtn) closeQrcBtn.addEventListener('click', () => { qrcModal.style.display = "none"; });
 
-  if (startBtn) startBtn.addEventListener('click', startGame);
+  if(startBtn){
+
+    startBtn.addEventListener('click', () => {
+
+        if(!gameActive){
+
+		startGame();
+
+		gamePaused = false;
+
+		startBtn.textContent = 	"Stop";
+		}
+        else if(!gamePaused){
+
+            gamePaused = true;
+
+            startBtn.textContent = "Resume";
+
+        }
+        else{
+
+            gamePaused = false;
+
+            startBtn.textContent = "Stop";
+
+        }
+
+    });
+
+}
   if (skipBtn) skipBtn.addEventListener('click', skipQuestion);
   if (hintBtn) hintBtn.addEventListener('click', triggerHint);
+  if(restartBtn)
+    restartBtn.addEventListener(
+        'click',
+        restartGame
+    );
+  
   
   buildQrcDirectory();
   animate();
+  document
+.getElementById("subject")
+.addEventListener("change", updateTopics);
+
+updateTopics();
 });
 </script>
 </body>
