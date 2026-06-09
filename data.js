@@ -6,7 +6,7 @@ const bank = [
 	
 	{
   "subject": "Physics",
-  "topic": "Units, Dimensions & Errors",
+  "topic": "Units & Vectors",
   "subtopic": "Error Analysis",
   "level": "Beginner",
   "q": "Percentage Error",
@@ -16,9 +16,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Units, Dimensions & Errors",
+  "topic": "Units & Vectors",
   "subtopic": "Error Analysis",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Error in Product",
   "a": "ΔZ/Z = ΔA/A + ΔB/B",
   "d": "Relative errors add during multiplication."
@@ -26,7 +26,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Vectors",
+  "topic": "Units & Vectors",
   "subtopic": "Vector Operations",
   "level": "Beginner",
   "q": "Magnitude of Vector",
@@ -36,9 +36,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Vectors",
+  "topic": "Units & Vectors",
   "subtopic": "Vector Operations",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Dot Product",
   "a": "A·B = AB cosθ",
   "d": "Scalar product of two vectors."
@@ -46,7 +46,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Vectors",
+  "topic": "Units & Vectors",
   "subtopic": "Vector Operations",
   "level": "Advanced",
   "q": "Vector Triple Product",
@@ -56,7 +56,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Kinematics",
+  "topic": "Mechanics",
   "subtopic": "Equations of Motion",
   "level": "Beginner",
   "q": "First Equation of Motion",
@@ -66,7 +66,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Kinematics",
+  "topic": "Mechanics",
   "subtopic": "Equations of Motion",
   "level": "Beginner",
   "q": "Second Equation of Motion",
@@ -76,7 +76,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Kinematics",
+  "topic": "Mechanics",
   "subtopic": "Equations of Motion",
   "level": "Beginner",
   "q": "Third Equation of Motion",
@@ -86,9 +86,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Kinematics",
+  "topic": "Mechanics",
   "subtopic": "Projectile Motion",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Range of Projectile",
   "a": "R = u²sin(2θ)/g",
   "d": "Horizontal distance travelled."
@@ -96,7 +96,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Kinematics",
+  "topic": "Mechanics",
   "subtopic": "Projectile Motion",
   "level": "Advanced",
   "q": "Maximum Height",
@@ -106,7 +106,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Laws of Motion",
+  "topic": "Mechanics",
   "subtopic": "Newton's Laws",
   "level": "Beginner",
   "q": "Newton's Second Law",
@@ -116,7 +116,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Laws of Motion",
+  "topic": "Mechanics",
   "subtopic": "Momentum",
   "level": "Beginner",
   "q": "Linear Momentum",
@@ -126,9 +126,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Laws of Motion",
+  "topic": "Mechanics",
   "subtopic": "Impulse",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Impulse",
   "a": "J = FΔt",
   "d": "Change in momentum."
@@ -136,9 +136,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Laws of Motion",
+  "topic": "Mechanics",
   "subtopic": "Friction",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Limiting Friction",
   "a": "f = μN",
   "d": "Maximum static friction."
@@ -146,7 +146,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Laws of Motion",
+  "topic": "Mechanics",
   "subtopic": "Circular Motion",
   "level": "Advanced",
   "q": "Banking Angle",
@@ -156,7 +156,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Work, Power & Energy",
+  "topic": "Mechanics",
   "subtopic": "Work",
   "level": "Beginner",
   "q": "Work Done",
@@ -166,7 +166,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Work, Power & Energy",
+  "topic": "Mechanics",
   "subtopic": "Energy",
   "level": "Beginner",
   "q": "Kinetic Energy",
@@ -176,7 +176,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Work, Power & Energy",
+  "topic": "Mechanics",
   "subtopic": "Energy",
   "level": "Beginner",
   "q": "Potential Energy",
@@ -186,7 +186,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Work, Power & Energy",
+  "topic": "Mechanics",
   "subtopic": "Power",
   "level": "Beginner",
   "q": "Power",
@@ -196,9 +196,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Work, Power & Energy",
+  "topic": "Mechanics",
   "subtopic": "Spring",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Spring Potential Energy",
   "a": "U = ½kx²",
   "d": "Energy stored in a spring."
@@ -206,9 +206,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Center of Mass",
+  "topic": "Mechanics",
   "subtopic": "Position",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Center of Mass",
   "a": "xcm = Σ(mixi)/Σ(mi)",
   "d": "Position of center of mass."
@@ -216,7 +216,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Rotational Motion",
+  "topic": "Mechanics",
   "subtopic": "Torque",
   "level": "Beginner",
   "q": "Torque",
@@ -226,9 +226,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Rotational Motion",
+  "topic": "Mechanics",
   "subtopic": "Angular Momentum",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Angular Momentum",
   "a": "L = Iω",
   "d": "Rotational equivalent of momentum."
@@ -236,7 +236,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Rotational Motion",
+  "topic": "Mechanics",
   "subtopic": "Moment of Inertia",
   "level": "Advanced",
   "q": "Parallel Axis Theorem",
@@ -246,7 +246,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Gravitation",
+  "topic": "Mechanics",
   "subtopic": "Universal Gravitation",
   "level": "Beginner",
   "q": "Gravitational Force",
@@ -256,9 +256,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Gravitation",
+  "topic": "Mechanics",
   "subtopic": "Satellite Motion",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Orbital Velocity",
   "a": "v = √(GM/R)",
   "d": "Velocity required for satellite orbit."
@@ -266,7 +266,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Gravitation",
+  "topic": "Mechanics",
   "subtopic": "Escape Velocity",
   "level": "Advanced",
   "q": "Escape Velocity",
@@ -276,9 +276,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Gravitation",
+  "topic": "Mechanics",
   "subtopic": "Gravitational Potential",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Gravitational Potential",
   "a": "V = -GM/r",
   "d": "Potential energy per unit mass."
@@ -286,7 +286,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Gravitation",
+  "topic": "Mechanics",
   "subtopic": "Satellite Motion",
   "level": "Advanced",
   "q": "Time Period of Satellite",
@@ -296,7 +296,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Properties of Matter",
+  "topic": "Matter & Fluids",
   "subtopic": "Elasticity",
   "level": "Beginner",
   "q": "Stress",
@@ -306,7 +306,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Properties of Matter",
+  "topic": "Matter & Fluids",
   "subtopic": "Elasticity",
   "level": "Beginner",
   "q": "Strain",
@@ -316,9 +316,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Properties of Matter",
+  "topic": "Matter & Fluids",
   "subtopic": "Elasticity",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Young's Modulus",
   "a": "Y = Stress/Strain",
   "d": "Ratio of longitudinal stress to strain."
@@ -326,9 +326,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Properties of Matter",
+  "topic": "Matter & Fluids",
   "subtopic": "Surface Tension",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Excess Pressure in Soap Bubble",
   "a": "ΔP = 4T/r",
   "d": "Pressure difference across a soap bubble."
@@ -336,7 +336,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Fluid Mechanics",
+  "topic": "Matter & Fluids",
   "subtopic": "Fluid Pressure",
   "level": "Beginner",
   "q": "Pressure",
@@ -346,7 +346,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Fluid Mechanics",
+  "topic": "Matter & Fluids",
   "subtopic": "Hydrostatics",
   "level": "Beginner",
   "q": "Hydrostatic Pressure",
@@ -356,9 +356,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Fluid Mechanics",
+  "topic": "Matter & Fluids",
   "subtopic": "Buoyancy",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Buoyant Force",
   "a": "Fb = ρVg",
   "d": "Upward force exerted by a fluid."
@@ -366,7 +366,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Fluid Mechanics",
+  "topic": "Matter & Fluids",
   "subtopic": "Fluid Flow",
   "level": "Advanced",
   "q": "Bernoulli's Equation",
@@ -376,7 +376,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Fluid Mechanics",
+  "topic": "Matter & Fluids",
   "subtopic": "Viscosity",
   "level": "Advanced",
   "q": "Poiseuille's Law",
@@ -398,7 +398,7 @@ const bank = [
   "subject": "Physics",
   "topic": "Thermal Physics",
   "subtopic": "Thermal Expansion",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Area Expansion",
   "a": "ΔA = 2αAΔT",
   "d": "Change in area due to temperature."
@@ -418,7 +418,7 @@ const bank = [
   "subject": "Physics",
   "topic": "Thermal Physics",
   "subtopic": "Latent Heat",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Latent Heat",
   "a": "Q = mL",
   "d": "Heat required during phase change."
@@ -426,7 +426,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Thermodynamics",
+  "topic": "Thermal Physics",
   "subtopic": "First Law",
   "level": "Beginner",
   "q": "First Law of Thermodynamics",
@@ -436,7 +436,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Thermodynamics",
+  "topic": "Thermal Physics",
   "subtopic": "Ideal Gas",
   "level": "Beginner",
   "q": "Ideal Gas Equation",
@@ -446,9 +446,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Thermodynamics",
+  "topic": "Thermal Physics",
   "subtopic": "Isothermal Process",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Work Done in Isothermal Process",
   "a": "W = nRT ln(V₂/V₁)",
   "d": "Work done during isothermal expansion/compression."
@@ -456,7 +456,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Thermodynamics",
+  "topic": "Thermal Physics",
   "subtopic": "Heat Engine",
   "level": "Advanced",
   "q": "Carnot Efficiency",
@@ -466,9 +466,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Kinetic Theory of Gases",
+  "topic": "Thermal Physics",
   "subtopic": "Gas Molecules",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "RMS Speed",
   "a": "vrms = √(3RT/M)",
   "d": "Root mean square speed of gas molecules."
@@ -476,7 +476,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Kinetic Theory of Gases",
+  "topic": "Thermal Physics",
   "subtopic": "Gas Pressure",
   "level": "Advanced",
   "q": "Pressure of Ideal Gas",
@@ -486,7 +486,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Oscillations",
+  "topic": "Oscillations & Waves",
   "subtopic": "Simple Harmonic Motion",
   "level": "Beginner",
   "q": "Displacement in SHM",
@@ -496,7 +496,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Oscillations",
+  "topic": "Oscillations & Waves",
   "subtopic": "Simple Harmonic Motion",
   "level": "Beginner",
   "q": "Angular Frequency",
@@ -506,9 +506,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Oscillations",
+  "topic": "Oscillations & Waves",
   "subtopic": "Simple Harmonic Motion",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Time Period of Spring-Mass System",
   "a": "T = 2π√(m/k)",
   "d": "Time period of a mass attached to a spring."
@@ -516,9 +516,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Oscillations",
+  "topic": "Oscillations & Waves",
   "subtopic": "Simple Harmonic Motion",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Maximum Velocity",
   "a": "vmax = Aω",
   "d": "Maximum speed in SHM."
@@ -526,7 +526,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Oscillations",
+  "topic": "Oscillations & Waves",
   "subtopic": "Simple Harmonic Motion",
   "level": "Advanced",
   "q": "Maximum Acceleration",
@@ -536,7 +536,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Oscillations",
+  "topic": "Oscillations & Waves",
   "subtopic": "Energy in SHM",
   "level": "Advanced",
   "q": "Total Energy in SHM",
@@ -546,7 +546,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Waves",
+  "topic": "Oscillations & Waves",
   "subtopic": "Wave Motion",
   "level": "Beginner",
   "q": "Wave Speed",
@@ -556,7 +556,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Waves",
+  "topic": "Oscillations & Waves",
   "subtopic": "Wave Motion",
   "level": "Beginner",
   "q": "Angular Frequency",
@@ -566,9 +566,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Waves",
+  "topic": "Oscillations & Waves",
   "subtopic": "Wave Motion",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Wave Number",
   "a": "k = 2π/λ",
   "d": "Spatial frequency of a wave."
@@ -576,9 +576,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Waves",
+  "topic": "Oscillations & Waves",
   "subtopic": "String Waves",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Speed of Wave on String",
   "a": "v = √(T/μ)",
   "d": "Wave speed on a stretched string."
@@ -586,7 +586,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Waves",
+  "topic": "Oscillations & Waves",
   "subtopic": "Standing Waves",
   "level": "Advanced",
   "q": "Fundamental Frequency",
@@ -596,7 +596,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Waves",
+  "topic": "Oscillations & Waves",
   "subtopic": "Doppler Effect",
   "level": "Advanced",
   "q": "Doppler Effect",
@@ -606,7 +606,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electrostatics",
+  "topic": "Electricity",
   "subtopic": "Electric Charges",
   "level": "Beginner",
   "q": "Coulomb's Law",
@@ -616,7 +616,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electrostatics",
+  "topic": "Electricity",
   "subtopic": "Electric Field",
   "level": "Beginner",
   "q": "Electric Field",
@@ -626,9 +626,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electrostatics",
+  "topic": "Electricity",
   "subtopic": "Electric Field",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Electric Field due to Point Charge",
   "a": "E = kq/r²",
   "d": "Electric field at distance r."
@@ -636,9 +636,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electrostatics",
+  "topic": "Electricity",
   "subtopic": "Potential",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Electric Potential",
   "a": "V = kq/r",
   "d": "Potential due to a point charge."
@@ -646,7 +646,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electrostatics",
+  "topic": "Electricity",
   "subtopic": "Potential Energy",
   "level": "Advanced",
   "q": "Potential Energy of Two Charges",
@@ -656,7 +656,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electrostatics",
+  "topic": "Electricity",
   "subtopic": "Dipole",
   "level": "Advanced",
   "q": "Dipole Moment",
@@ -666,7 +666,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Capacitance",
+  "topic": "Electricity",
   "subtopic": "Capacitors",
   "level": "Beginner",
   "q": "Capacitance Definition",
@@ -676,9 +676,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Capacitance",
+  "topic": "Electricity",
   "subtopic": "Parallel Plate Capacitor",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Capacitance of Parallel Plate Capacitor",
   "a": "C = ε₀A/d",
   "d": "Capacitance of two parallel conducting plates."
@@ -686,9 +686,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Capacitance",
+  "topic": "Electricity",
   "subtopic": "Capacitor Energy",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Energy Stored",
   "a": "U = ½CV²",
   "d": "Electrostatic energy stored in capacitor."
@@ -696,7 +696,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Capacitance",
+  "topic": "Electricity",
   "subtopic": "Capacitor Combination",
   "level": "Advanced",
   "q": "Series Combination",
@@ -706,7 +706,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Capacitance",
+  "topic": "Electricity",
   "subtopic": "Capacitor Combination",
   "level": "Advanced",
   "q": "Parallel Combination",
@@ -716,7 +716,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Current Electricity",
+  "topic": "Electricity",
   "subtopic": "Electric Current",
   "level": "Beginner",
   "q": "Electric Current",
@@ -726,7 +726,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Current Electricity",
+  "topic": "Electricity",
   "subtopic": "Ohm's Law",
   "level": "Beginner",
   "q": "Ohm's Law",
@@ -736,9 +736,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Current Electricity",
+  "topic": "Electricity",
   "subtopic": "Resistance",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Resistance of Conductor",
   "a": "R = ρL/A",
   "d": "Resistance in terms of resistivity."
@@ -746,9 +746,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Current Electricity",
+  "topic": "Electricity",
   "subtopic": "Electrical Power",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Electrical Power",
   "a": "P = VI",
   "d": "Rate of electrical energy consumption."
@@ -756,9 +756,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Current Electricity",
+  "topic": "Electricity",
   "subtopic": "Electrical Power",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Power using Resistance",
   "a": "P = I²R",
   "d": "Power dissipated in resistor."
@@ -766,9 +766,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Current Electricity",
+  "topic": "Electricity",
   "subtopic": "Electrical Energy",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Electrical Energy",
   "a": "W = VIt",
   "d": "Electrical work done."
@@ -776,7 +776,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Current Electricity",
+  "topic": "Electricity",
   "subtopic": "Kirchhoff's Laws",
   "level": "Advanced",
   "q": "Junction Rule",
@@ -786,7 +786,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Current Electricity",
+  "topic": "Electricity",
   "subtopic": "Wheatstone Bridge",
   "level": "Advanced",
   "q": "Balance Condition",
@@ -796,7 +796,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Magnetic Effects of Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "Magnetic Field",
   "level": "Beginner",
   "q": "Magnetic Force on Moving Charge",
@@ -806,7 +806,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Magnetic Effects of Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "Magnetic Field",
   "level": "Beginner",
   "q": "Magnetic Force on Current Carrying Wire",
@@ -816,9 +816,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Magnetic Effects of Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "Biot-Savart Law",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Field due to Long Straight Wire",
   "a": "B = μ₀I/(2πr)",
   "d": "Magnetic field at distance r from wire."
@@ -826,9 +826,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Magnetic Effects of Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "Circular Loop",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Field at Center of Circular Loop",
   "a": "B = μ₀I/(2R)",
   "d": "Magnetic field at center of current loop."
@@ -836,9 +836,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Magnetic Effects of Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "Solenoid",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Field inside Solenoid",
   "a": "B = μ₀nI",
   "d": "Magnetic field inside a long solenoid."
@@ -846,7 +846,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Magnetic Effects of Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "Current Loop",
   "level": "Advanced",
   "q": "Magnetic Dipole Moment",
@@ -856,7 +856,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Magnetism",
+  "topic": "Magnetism & EMI",
   "subtopic": "Bar Magnet",
   "level": "Beginner",
   "q": "Torque on Magnetic Dipole",
@@ -866,9 +866,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Magnetism",
+  "topic": "Magnetism & EMI",
   "subtopic": "Bar Magnet",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Potential Energy of Dipole",
   "a": "U = -MB cosθ",
   "d": "Potential energy in magnetic field."
@@ -876,9 +876,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Magnetism",
+  "topic": "Magnetism & EMI",
   "subtopic": "Earth Magnetism",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Tan A Law",
   "a": "B = BH tanθ",
   "d": "Used in tangent galvanometer."
@@ -886,7 +886,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Magnetism",
+  "topic": "Magnetism & EMI",
   "subtopic": "Magnetic Materials",
   "level": "Advanced",
   "q": "Magnetic Susceptibility",
@@ -896,7 +896,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electromagnetic Induction",
+  "topic": "Magnetism & EMI",
   "subtopic": "Magnetic Flux",
   "level": "Beginner",
   "q": "Magnetic Flux",
@@ -906,9 +906,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electromagnetic Induction",
+  "topic": "Magnetism & EMI",
   "subtopic": "Faraday Law",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Induced EMF",
   "a": "E = -dΦ/dt",
   "d": "Faraday's law of electromagnetic induction."
@@ -916,9 +916,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electromagnetic Induction",
+  "topic": "Magnetism & EMI",
   "subtopic": "Motional EMF",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Motional EMF",
   "a": "E = Blv",
   "d": "EMF induced in moving conductor."
@@ -926,7 +926,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electromagnetic Induction",
+  "topic": "Magnetism & EMI",
   "subtopic": "Self Inductance",
   "level": "Advanced",
   "q": "Self Induced EMF",
@@ -936,7 +936,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electromagnetic Induction",
+  "topic": "Magnetism & EMI",
   "subtopic": "Inductor",
   "level": "Advanced",
   "q": "Energy Stored in Inductor",
@@ -946,7 +946,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Alternating Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "AC Current",
   "level": "Beginner",
   "q": "Instantaneous Current",
@@ -956,7 +956,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Alternating Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "AC Voltage",
   "level": "Beginner",
   "q": "Instantaneous Voltage",
@@ -966,9 +966,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Alternating Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "RMS Values",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "RMS Current",
   "a": "Irms = I₀/√2",
   "d": "Effective value of AC current."
@@ -976,9 +976,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Alternating Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "RMS Values",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "RMS Voltage",
   "a": "Vrms = V₀/√2",
   "d": "Effective value of AC voltage."
@@ -986,7 +986,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Alternating Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "AC Circuit",
   "level": "Advanced",
   "q": "Inductive Reactance",
@@ -996,7 +996,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Alternating Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "AC Circuit",
   "level": "Advanced",
   "q": "Capacitive Reactance",
@@ -1006,7 +1006,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Alternating Current",
+  "topic": "Magnetism & EMI",
   "subtopic": "Transformer",
   "level": "Advanced",
   "q": "Transformer Equation",
@@ -1016,7 +1016,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electromagnetic Waves",
+  "topic": "Magnetism & EMI",
   "subtopic": "Wave Properties",
   "level": "Beginner",
   "q": "Speed of Electromagnetic Wave",
@@ -1026,9 +1026,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electromagnetic Waves",
+  "topic": "Magnetism & EMI",
   "subtopic": "Wave Properties",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Speed in Vacuum",
   "a": "c = 1/√(μ₀ε₀)",
   "d": "Speed of light in vacuum."
@@ -1036,9 +1036,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electromagnetic Waves",
+  "topic": "Magnetism & EMI",
   "subtopic": "Electric and Magnetic Fields",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Field Ratio",
   "a": "E/B = c",
   "d": "Relation between electric and magnetic field amplitudes."
@@ -1046,7 +1046,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electromagnetic Waves",
+  "topic": "Magnetism & EMI",
   "subtopic": "Photon Energy",
   "level": "Advanced",
   "q": "Photon Energy",
@@ -1056,7 +1056,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Electromagnetic Waves",
+  "topic": "Magnetism & EMI",
   "subtopic": "Photon Momentum",
   "level": "Advanced",
   "q": "Photon Momentum",
@@ -1066,7 +1066,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Ray Optics",
+  "topic": "Optics",
   "subtopic": "Reflection",
   "level": "Beginner",
   "q": "Mirror Formula",
@@ -1076,9 +1076,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Ray Optics",
+  "topic": "Optics",
   "subtopic": "Reflection",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Magnification in Mirror",
   "a": "m = -v/u",
   "d": "Ratio of image height to object height."
@@ -1086,7 +1086,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Ray Optics",
+  "topic": "Optics",
   "subtopic": "Refraction",
   "level": "Beginner",
   "q": "Snell's Law",
@@ -1096,9 +1096,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Ray Optics",
+  "topic": "Optics",
   "subtopic": "Refraction",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Refractive Index",
   "a": "n = c/v",
   "d": "Ratio of speed of light in vacuum to medium."
@@ -1106,7 +1106,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Ray Optics",
+  "topic": "Optics",
   "subtopic": "Lens",
   "level": "Beginner",
   "q": "Lens Formula",
@@ -1116,9 +1116,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Ray Optics",
+  "topic": "Optics",
   "subtopic": "Lens",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Magnification in Lens",
   "a": "m = v/u",
   "d": "Linear magnification produced by lens."
@@ -1126,7 +1126,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Ray Optics",
+  "topic": "Optics",
   "subtopic": "Lens",
   "level": "Advanced",
   "q": "Lens Maker Formula",
@@ -1136,7 +1136,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Ray Optics",
+  "topic": "Optics",
   "subtopic": "Prism",
   "level": "Advanced",
   "q": "Prism Formula",
@@ -1146,9 +1146,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Wave Optics",
+  "topic": "Optics",
   "subtopic": "Interference",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Fringe Width",
   "a": "β = λD/d",
   "d": "Width of interference fringes in YDSE."
@@ -1156,7 +1156,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Wave Optics",
+  "topic": "Optics",
   "subtopic": "Interference",
   "level": "Advanced",
   "q": "Path Difference",
@@ -1166,7 +1166,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Wave Optics",
+  "topic": "Optics",
   "subtopic": "Diffraction",
   "level": "Advanced",
   "q": "Single Slit Diffraction",
@@ -1176,7 +1176,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Wave Optics",
+  "topic": "Optics",
   "subtopic": "Polarization",
   "level": "Advanced",
   "q": "Malus Law",
@@ -1186,7 +1186,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Dual Nature of Matter",
+  "topic": "Modern Physics",
   "subtopic": "Photon",
   "level": "Beginner",
   "q": "Photon Energy",
@@ -1196,9 +1196,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Dual Nature of Matter",
+  "topic": "Modern Physics",
   "subtopic": "Photon",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Photon Momentum",
   "a": "p = h/λ",
   "d": "Momentum associated with light."
@@ -1206,9 +1206,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Dual Nature of Matter",
+  "topic": "Modern Physics",
   "subtopic": "Matter Waves",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "de Broglie Wavelength",
   "a": "λ = h/p",
   "d": "Wavelength associated with moving particle."
@@ -1216,7 +1216,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Dual Nature of Matter",
+  "topic": "Modern Physics",
   "subtopic": "Photoelectric Effect",
   "level": "Advanced",
   "q": "Einstein Photoelectric Equation",
@@ -1226,7 +1226,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Dual Nature of Matter",
+  "topic": "Modern Physics",
   "subtopic": "Photoelectric Effect",
   "level": "Advanced",
   "q": "Stopping Potential",
@@ -1236,9 +1236,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Atoms",
+  "topic": "Modern Physics",
   "subtopic": "Bohr Model",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Radius of nth Orbit",
   "a": "rn = n²a₀/Z",
   "d": "Radius of electron orbit in Bohr model."
@@ -1246,9 +1246,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Atoms",
+  "topic": "Modern Physics",
   "subtopic": "Bohr Model",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Velocity of Electron",
   "a": "vn = (Zαc)/n",
   "d": "Electron speed in nth orbit."
@@ -1256,7 +1256,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Atoms",
+  "topic": "Modern Physics",
   "subtopic": "Bohr Model",
   "level": "Advanced",
   "q": "Energy of nth Orbit",
@@ -1266,7 +1266,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Atoms",
+  "topic": "Modern Physics",
   "subtopic": "Spectral Series",
   "level": "Advanced",
   "q": "Rydberg Formula",
@@ -1276,7 +1276,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Nuclei",
+  "topic": "Modern Physics",
   "subtopic": "Nuclear Properties",
   "level": "Beginner",
   "q": "Mass-Energy Relation",
@@ -1286,9 +1286,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Nuclei",
+  "topic": "Modern Physics",
   "subtopic": "Binding Energy",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Binding Energy",
   "a": "BE = Δmc²",
   "d": "Energy required to separate nucleus."
@@ -1296,9 +1296,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Nuclei",
+  "topic": "Modern Physics",
   "subtopic": "Radioactivity",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Radioactive Decay Law",
   "a": "N = N₀e^(-λt)",
   "d": "Number of undecayed nuclei after time t."
@@ -1306,7 +1306,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Nuclei",
+  "topic": "Modern Physics",
   "subtopic": "Radioactivity",
   "level": "Advanced",
   "q": "Half Life",
@@ -1316,7 +1316,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Nuclei",
+  "topic": "Modern Physics",
   "subtopic": "Radioactivity",
   "level": "Advanced",
   "q": "Activity",
@@ -1326,7 +1326,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Semiconductors",
+  "topic": "Modern Physics",
   "subtopic": "Current Flow",
   "level": "Beginner",
   "q": "Current",
@@ -1336,9 +1336,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Semiconductors",
+  "topic": "Modern Physics",
   "subtopic": "Diode",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "Diode Current Equation",
   "a": "I = I₀(e^(eV/ηkT)-1)",
   "d": "Current-voltage relation of p-n junction diode."
@@ -1346,9 +1346,9 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Semiconductors",
+  "topic": "Modern Physics",
   "subtopic": "Logic Gates",
-  "level": "Intermediate",
+  "level": "Advanced",
   "q": "NOT Gate Output",
   "a": "Y = Ā",
   "d": "Output is complement of input."
@@ -1356,7 +1356,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Semiconductors",
+  "topic": "Modern Physics",
   "subtopic": "Logic Gates",
   "level": "Advanced",
   "q": "AND Gate Output",
@@ -1366,7 +1366,7 @@ const bank = [
 
 {
   "subject": "Physics",
-  "topic": "Semiconductors",
+  "topic": "Modern Physics",
   "subtopic": "Logic Gates",
   "level": "Advanced",
   "q": "OR Gate Output",
@@ -1402,7 +1402,7 @@ const bank = [
   "subject":"Chemistry",
   "topic":"Mole Concept",
   "subtopic":"Gas Volume",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"Volume at STP",
   "a":"V = 22.4n",
   "d":"Volume occupied by ideal gas at STP."
@@ -1412,7 +1412,7 @@ const bank = [
   "subject":"Chemistry",
   "topic":"Mole Concept",
   "subtopic":"Concentration",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"Molarity",
   "a":"M = n/V",
   "d":"Moles per litre of solution."
@@ -1422,7 +1422,7 @@ const bank = [
   "subject":"Chemistry",
   "topic":"Atomic Structure",
   "subtopic":"Bohr Model",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"Radius of nth Orbit",
   "a":"rn = n²a₀/Z",
   "d":"Radius of Bohr orbit."
@@ -1450,7 +1450,7 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Gaseous State",
+  "topic":"States of Matter",
   "subtopic":"Gas Laws",
   "level":"Beginner",
   "q":"Ideal Gas Equation",
@@ -1460,9 +1460,9 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Gaseous State",
+  "topic":"States of Matter",
   "subtopic":"Gas Mixtures",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"Dalton's Law",
   "a":"Ptotal = P1 + P2 + ...",
   "d":"Total pressure equals sum of partial pressures."
@@ -1470,9 +1470,9 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Gaseous State",
+  "topic":"States of Matter",
   "subtopic":"Kinetic Theory",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"RMS Velocity",
   "a":"vrms = √(3RT/M)",
   "d":"Root mean square velocity."
@@ -1480,7 +1480,7 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Gaseous State",
+  "topic":"States of Matter",
   "subtopic":"Kinetic Theory",
   "level":"Advanced",
   "q":"Average KE",
@@ -1490,7 +1490,7 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Thermodynamics",
+  "topic":"Thermal Chemistry",
   "subtopic":"First Law",
   "level":"Beginner",
   "q":"First Law",
@@ -1500,9 +1500,9 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Thermodynamics",
+  "topic":"Thermal Chemistry",
   "subtopic":"Enthalpy",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"Enthalpy Change",
   "a":"ΔH = ΔU + ΔnRT",
   "d":"Relation between enthalpy and internal energy."
@@ -1510,7 +1510,7 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Thermodynamics",
+  "topic":"Thermal Chemistry",
   "subtopic":"Spontaneity",
   "level":"Advanced",
   "q":"Gibbs Free Energy",
@@ -1520,7 +1520,7 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Chemical Equilibrium",
+  "topic":"Equilibrium",
   "subtopic":"Equilibrium Constant",
   "level":"Beginner",
   "q":"Kc Expression",
@@ -1530,9 +1530,9 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Chemical Equilibrium",
+  "topic":"Equilibrium",
   "subtopic":"Gas Equilibrium",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"Kp and Kc Relation",
   "a":"Kp = Kc(RT)^Δn",
   "d":"Relation between Kp and Kc."
@@ -1540,7 +1540,7 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Ionic Equilibrium",
+  "topic":"Equilibrium",
   "subtopic":"pH",
   "level":"Beginner",
   "q":"pH",
@@ -1550,7 +1550,7 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Ionic Equilibrium",
+  "topic":"Equilibrium",
   "subtopic":"pOH",
   "level":"Beginner",
   "q":"pOH",
@@ -1560,9 +1560,9 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Ionic Equilibrium",
+  "topic":"Equilibrium",
   "subtopic":"Water",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"Ionic Product of Water",
   "a":"Kw = [H+][OH-]",
   "d":"Water ionization constant."
@@ -1570,7 +1570,7 @@ const bank = [
 
 {
   "subject":"Chemistry",
-  "topic":"Ionic Equilibrium",
+  "topic":"Equilibrium",
   "subtopic":"Buffers",
   "level":"Advanced",
   "q":"Henderson Equation",
@@ -1582,7 +1582,7 @@ const bank = [
   "subject":"Chemistry",
   "topic":"Redox Reactions",
   "subtopic":"Equivalent Weight",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"Equivalent Weight",
   "a":"Eq. wt = Molecular Weight/n-factor",
   "d":"Equivalent weight calculation."
@@ -1602,7 +1602,7 @@ const bank = [
   "subject":"Chemistry",
   "topic":"Solutions",
   "subtopic":"Colligative Properties",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"Relative Lowering of Vapour Pressure",
   "a":"ΔP/P° = Xsolute",
   "d":"Raoult's law."
@@ -1652,7 +1652,7 @@ const bank = [
   "subject":"Chemistry",
   "topic":"Chemical Kinetics",
   "subtopic":"Half Life",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"First Order Half Life",
   "a":"t1/2 = 0.693/k",
   "d":"Half-life of first order reaction."
@@ -1683,7 +1683,7 @@ const bank = [
   "subject":"Chemistry",
   "topic":"Solid State",
   "subtopic":"Density",
-  "level":"Intermediate",
+  "level":"Advanced",
   "q":"Crystal Density",
   "a":"ρ = ZM/(a³NA)",
   "d":"Density of unit cell."
@@ -1784,7 +1784,7 @@ const bank = [
   subject:"Maths",
   topic:"Algebra",
   subtopic:"Sequence & Series",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Sum of AP",
   a:"Sₙ = n/2[2a+(n−1)d]",
   d:"Sum of first n terms of AP."
@@ -1804,7 +1804,7 @@ const bank = [
   subject:"Maths",
   topic:"Algebra",
   subtopic:"Sequence & Series",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Sum of GP",
   a:"Sₙ = a(rⁿ−1)/(r−1)",
   d:"Sum of first n terms of GP."
@@ -1814,7 +1814,7 @@ const bank = [
   subject:"Maths",
   topic:"Algebra",
   subtopic:"Sequence & Series",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Infinite GP",
   a:"S∞ = a/(1−r)",
   d:"Valid when |r| < 1."
@@ -1824,7 +1824,7 @@ const bank = [
   subject:"Maths",
   topic:"Algebra",
   subtopic:"Binomial Theorem",
-  level:"Intermediate",
+  level:"Advanced",
   q:"General Term",
   a:"T(r+1)=ⁿCᵣ aⁿ⁻ʳ bʳ",
   d:"General term in binomial expansion."
@@ -1854,7 +1854,7 @@ const bank = [
   subject:"Maths",
   topic:"Algebra",
   subtopic:"Matrices & Determinants",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Inverse Matrix",
   a:"A⁻¹ = adj(A)/|A|",
   d:"Exists only if determinant ≠ 0."
@@ -1864,7 +1864,7 @@ const bank = [
   subject:"Maths",
   topic:"Algebra",
   subtopic:"Matrices & Determinants",
-  level:"Intermediate",
+  level:"Advanced",
   q:"2×2 Determinant",
   a:"|A| = ad−bc",
   d:"Determinant of a 2×2 matrix."
@@ -1874,7 +1874,7 @@ const bank = [
   subject:"Maths",
   topic:"Algebra",
   subtopic:"Probability",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Conditional Probability",
   a:"P(A|B)=P(A∩B)/P(B)",
   d:"Probability of A given B."
@@ -1884,7 +1884,7 @@ const bank = [
   subject:"Maths",
   topic:"Algebra",
   subtopic:"Probability",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Bayes Theorem",
   a:"P(A|B)=P(B|A)P(A)/P(B)",
   d:"Updates probability using evidence."
@@ -1918,7 +1918,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Limits",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Standard Limit",
   a:"lim(x→0) sinx/x = 1",
   d:"Most important standard limit."
@@ -1928,7 +1928,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Limits",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Standard Limit",
   a:"lim(x→0) tanx/x = 1",
   d:"Used frequently in trigonometric limits."
@@ -1938,7 +1938,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Limits",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Exponential Limit",
   a:"lim(x→0) (e^x−1)/x = 1",
   d:"Important exponential limit."
@@ -1948,7 +1948,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Limits",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Logarithmic Limit",
   a:"lim(x→0) log(1+x)/x = 1",
   d:"Important logarithmic limit."
@@ -2032,7 +2032,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Differentiation",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Chain Rule",
   a:"d/dx[f(g(x))]=f'(g(x))·g'(x)",
   d:"Derivative of composite functions."
@@ -2056,7 +2056,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Application of Derivatives",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Slope of Normal",
   a:"m=−1/(dy/dx)",
   d:"Slope of normal to a curve."
@@ -2070,7 +2070,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Indefinite Integration",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Power Rule Integration",
   a:"∫xⁿdx = xⁿ⁺¹/(n+1)+C",
   d:"n ≠ −1"
@@ -2080,7 +2080,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Indefinite Integration",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Integral of 1/x",
   a:"∫dx/x = ln|x|+C",
   d:"Special logarithmic integral."
@@ -2120,7 +2120,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Indefinite Integration",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Integration by Parts",
   a:"∫u dv = uv − ∫v du",
   d:"Very important integration technique."
@@ -2134,7 +2134,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Definite Integration",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Fundamental Theorem",
   a:"∫[a→b] f(x)dx = F(b)-F(a)",
   d:"Main theorem of definite integration."
@@ -2158,7 +2158,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Area Under Curves",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Area Under Curve",
   a:"A = ∫[a→b] y dx",
   d:"Area bounded by curve and x-axis."
@@ -2172,7 +2172,7 @@ const bank = [
   subject:"Maths",
   topic:"Calculus",
   subtopic:"Differential Equations",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Variable Separable Form",
   a:"dy/dx = f(x)g(y)",
   d:"Solve by separating variables."
@@ -2242,7 +2242,7 @@ const bank = [
   subject:"Maths",
   topic:"Coordinate Geometry",
   subtopic:"Straight Lines",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Distance of Point from Line",
   a:"|Ax₀+By₀+C|/√(A²+B²)",
   d:"Shortest distance."
@@ -2252,7 +2252,7 @@ const bank = [
   subject:"Maths",
   topic:"Coordinate Geometry",
   subtopic:"Straight Lines",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Angle Between Two Lines",
   a:"tanθ=|(m₁-m₂)/(1+m₁m₂)|",
   d:"Angle between lines."
@@ -2282,7 +2282,7 @@ const bank = [
   subject:"Maths",
   topic:"Coordinate Geometry",
   subtopic:"Circles",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Radius from General Equation",
   a:"√(g²+f²-c)",
   d:"Radius of circle."
@@ -2292,7 +2292,7 @@ const bank = [
   subject:"Maths",
   topic:"Coordinate Geometry",
   subtopic:"Parabola",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Standard Parabola",
   a:"y²=4ax",
   d:"Parabola opening right."
@@ -2302,7 +2302,7 @@ const bank = [
   subject:"Maths",
   topic:"Coordinate Geometry",
   subtopic:"Parabola",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Length of Latus Rectum in Parabola",
   a:"4a",
   d:"Important property."
@@ -2312,7 +2312,7 @@ const bank = [
   subject:"Maths",
   topic:"Coordinate Geometry",
   subtopic:"Parabola",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Equation of Tangent in Parabola",
   a:"yy₁=2a(x+x₁)",
   d:"Tangent at point."
@@ -2322,7 +2322,7 @@ const bank = [
   subject:"Maths",
   topic:"Coordinate Geometry",
   subtopic:"Ellipse",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Standard Ellipse",
   a:"x²/a²+y²/b²=1",
   d:"Ellipse equation."
@@ -2424,7 +2424,7 @@ const bank = [
   subject:"Maths",
   topic:"Trigonometry",
   subtopic:"Trigonometric Identities",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Identity",
   a:"1 + tan²θ = sec²θ",
   d:"Important identity."
@@ -2434,7 +2434,7 @@ const bank = [
   subject:"Maths",
   topic:"Trigonometry",
   subtopic:"Trigonometric Identities",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Identity",
   a:"1 + cot²θ = cosec²θ",
   d:"Important identity."
@@ -2464,7 +2464,7 @@ const bank = [
   subject:"Maths",
   topic:"Trigonometry",
   subtopic:"Trigonometric Identities",
-  level:"Intermediate",
+  level:"Advanced",
   q:"tan(A+B)",
   a:"(tanA+tanB)/(1−tanA tanB)",
   d:"Addition formula."
@@ -2474,7 +2474,7 @@ const bank = [
   subject:"Maths",
   topic:"Trigonometry",
   subtopic:"Trigonometric Identities",
-  level:"Intermediate",
+  level:"Advanced",
   q:"sin 2θ",
   a:"2sinθ cosθ",
   d:"Double angle."
@@ -2484,7 +2484,7 @@ const bank = [
   subject:"Maths",
   topic:"Trigonometry",
   subtopic:"Trigonometric Identities",
-  level:"Intermediate",
+  level:"Advanced",
   q:"cos 2θ",
   a:"cos²θ−sin²θ",
   d:"Double angle."
@@ -2494,7 +2494,7 @@ const bank = [
   subject:"Maths",
   topic:"Trigonometry",
   subtopic:"Trigonometric Identities",
-  level:"Intermediate",
+  level:"Advanced",
   q:"tan 2θ",
   a:"2tanθ/(1−tan²θ)",
   d:"Double angle."
@@ -2524,7 +2524,7 @@ const bank = [
   subject:"Maths",
   topic:"Trigonometry",
   subtopic:"Trigonometric Identities",
-  level:"Intermediate",
+  level:"Advanced",
   q:"sin²(θ/2)",
   a:"(1−cosθ)/2",
   d:"Half-angle formula."
@@ -2534,7 +2534,7 @@ const bank = [
   subject:"Maths",
   topic:"Trigonometry",
   subtopic:"Trigonometric Identities",
-  level:"Intermediate",
+  level:"Advanced",
   q:"cos²(θ/2)",
   a:"(1+cosθ)/2",
   d:"Half-angle formula."
@@ -2598,7 +2598,7 @@ const bank = [
   subject:"Maths",
   topic:"Vectors & 3D Geometry",
   subtopic:"Vectors",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Angle Between Vectors",
   a:"cosθ = (a·b)/(|a||b|)",
   d:"Angle between two vectors."
@@ -2608,7 +2608,7 @@ const bank = [
   subject:"Maths",
   topic:"Vectors & 3D Geometry",
   subtopic:"Vectors",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Cross Product",
   a:"|a×b| = |a||b|sinθ",
   d:"Vector product."
@@ -2618,7 +2618,7 @@ const bank = [
   subject:"Maths",
   topic:"Vectors & 3D Geometry",
   subtopic:"Vectors",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Area of Parallelogram",
   a:"|a×b|",
   d:"Area formed by two vectors."
@@ -2628,7 +2628,7 @@ const bank = [
   subject:"Maths",
   topic:"Vectors & 3D Geometry",
   subtopic:"Vectors",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Area of Triangle",
   a:"½|a×b|",
   d:"Area formed by two vectors."
@@ -2638,7 +2638,7 @@ const bank = [
   subject:"Maths",
   topic:"Vectors & 3D Geometry",
   subtopic:"Vectors",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Scalar Triple Product",
   a:"a·(b×c)",
   d:"Volume-related quantity."
@@ -2692,7 +2692,7 @@ const bank = [
   subject:"Maths",
   topic:"Vectors & 3D Geometry",
   subtopic:"3D Geometry",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Equation of Line",
   a:"(x-x₁)/l = (y-y₁)/m = (z-z₁)/n",
   d:"Symmetric form of line."
@@ -2712,7 +2712,7 @@ const bank = [
   subject:"Maths",
   topic:"Vectors & 3D Geometry",
   subtopic:"3D Geometry",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Distance of Point from Plane",
   a:"|ax₁+by₁+cz₁+d|/√(a²+b²+c²)",
   d:"Shortest distance."
@@ -2766,7 +2766,7 @@ const bank = [
   subject:"Maths",
   topic:"Probability",
   subtopic:"Addition Theorem",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Addition Rule",
   a:"P(A∪B)=P(A)+P(B)-P(A∩B)",
   d:"Probability of union."
@@ -2776,7 +2776,7 @@ const bank = [
   subject:"Maths",
   topic:"Probability",
   subtopic:"Conditional Probability",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Conditional Probability",
   a:"P(A|B)=P(A∩B)/P(B)",
   d:"Given B has occurred."
@@ -2786,7 +2786,7 @@ const bank = [
   subject:"Maths",
   topic:"Probability",
   subtopic:"Independent Events",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Independent Events",
   a:"P(A∩B)=P(A)P(B)",
   d:"For independent events."
@@ -2796,7 +2796,7 @@ const bank = [
   subject:"Maths",
   topic:"Probability",
   subtopic:"Bayes Theorem",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Bayes Theorem",
   a:"P(A|B)=P(B|A)P(A)/P(B)",
   d:"Posterior probability."
@@ -2844,7 +2844,7 @@ const bank = [
   subject:"Maths",
   topic:"Sets, Relations & Functions",
   subtopic:"Sets",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Union of Two Sets",
   a:"n(A∪B)=n(A)+n(B)-n(A∩B)",
   d:"Inclusion-Exclusion Principle."
@@ -2854,7 +2854,7 @@ const bank = [
   subject:"Maths",
   topic:"Sets, Relations & Functions",
   subtopic:"Sets",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Complement Rule",
   a:"n(A')=n(U)-n(A)",
   d:"Elements outside set A."
@@ -2864,7 +2864,7 @@ const bank = [
   subject:"Maths",
   topic:"Sets, Relations & Functions",
   subtopic:"Sets",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Three Set Formula",
   a:"n(A∪B∪C)=n(A)+n(B)+n(C)-n(A∩B)-n(B∩C)-n(C∩A)+n(A∩B∩C)",
   d:"Inclusion-Exclusion for three sets."
@@ -2878,7 +2878,7 @@ const bank = [
   subject:"Maths",
   topic:"Sets, Relations & Functions",
   subtopic:"Relations",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Number of Relations",
   a:"2^(mn)",
   d:"Number of relations from set A(m) to set B(n)."
@@ -2888,7 +2888,7 @@ const bank = [
   subject:"Maths",
   topic:"Sets, Relations & Functions",
   subtopic:"Relations",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Number of Relations on Set",
   a:"2^(n²)",
   d:"Relations on a set having n elements."
@@ -2902,7 +2902,7 @@ const bank = [
   subject:"Maths",
   topic:"Sets, Relations & Functions",
   subtopic:"Functions",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Composition of Functions",
   a:"(f∘g)(x)=f(g(x))",
   d:"Composite function."
@@ -2912,7 +2912,7 @@ const bank = [
   subject:"Maths",
   topic:"Sets, Relations & Functions",
   subtopic:"Functions",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Inverse Function Property",
   a:"f(f⁻¹(x))=x",
   d:"Property of inverse functions."
@@ -2922,7 +2922,7 @@ const bank = [
   subject:"Maths",
   topic:"Sets, Relations & Functions",
   subtopic:"Functions",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Identity Function",
   a:"I(x)=x",
   d:"Maps every element to itself."
@@ -2946,7 +2946,7 @@ const bank = [
   subject:"Maths",
   topic:"Mathematical Reasoning",
   subtopic:"Logic",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Converse",
   a:"q→p",
   d:"Converse of implication."
@@ -2956,7 +2956,7 @@ const bank = [
   subject:"Maths",
   topic:"Mathematical Reasoning",
   subtopic:"Logic",
-  level:"Intermediate",
+  level:"Advanced",
   q:"Contrapositive",
   a:"¬q→¬p",
   d:"Equivalent to implication."
@@ -2966,7 +2966,7 @@ const bank = [
   subject:"Maths",
   topic:"Mathematical Reasoning",
   subtopic:"Logic",
-  level:"Intermediate",
+  level:"Advanced",
   q:"De Morgan's Law",
   a:"¬(p∧q)=¬p∨¬q",
   d:"Logical identity."

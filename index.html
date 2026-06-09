@@ -4,9 +4,32 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>JEE Formula Hunt</title>
+
 <style>
 body{margin:0;background:#0f172a;color:#fff;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;overflow:hidden;user-select:none;}
 #top{height:100px;background:#111827;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #1f2937;}
+
+#aboutBtn{
+    position:fixed;
+    top:15px;
+    left:15px;
+    width:28px;
+    height:28px;
+    background:#2563eb;
+    color:white;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:1000;
+	border-radius:20%
+	outline:none
+}
+
+#aboutBtn:hover{
+    transform:scale(1.1);
+}
 
 /* Safe zone margin to ensure pulsing text animations never scale outside screen viewport boundaries */
 #question-container{flex-grow:1;max-width:45%; margin-left: 45px; padding-left: 10px;}
@@ -29,8 +52,6 @@ select:hover, button:hover {background:#334155;}
 #startBtn:hover {background:#3b82f6;}
 #skipBtn {background:#475569;border:none;font-weight:bold;}
 #skipBtn:hover {background:#64748b;}
-#hintBtn {background:#d97706;border:none;font-weight:bold;}
-#hintBtn:hover {background:#f59e0b;}
 #qrcBtn {background:#059669;border:none;font-weight:bold;}
 #qrcBtn:hover {background:#10b981;}
 #restartBtn{
@@ -42,7 +63,10 @@ select:hover, button:hover {background:#334155;}
 #restartBtn:hover{
     background:#ef4444;
 }
-
+select:disabled{
+    opacity:0.5;
+    cursor:not-allowed;
+}
 #arena{position:relative;height:calc(100vh - 120px);overflow:hidden;background:radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);}
 .formula{position:absolute;padding:10px 16px;border-radius:12px;font-weight:bold;font-size:16px;cursor:pointer;background:rgba(15, 23, 42, 0.6);backdrop-filter:blur(4px);box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);transition:transform 0.1s ease, border 0.2s ease, box-shadow 0.2s ease;white-space:nowrap;}
 .formula:hover{transform:scale(1.1);background:rgba(30, 41, 59, 0.8);z-index:10;}
@@ -50,16 +74,7 @@ select:hover, button:hover {background:#334155;}
 
 @keyframes pulse{0%{transform:scale(1);} 50%{transform:scale(1.04); text-shadow: 0 0 12px currentColor;} 100%{transform:scale(1);}}
 .flashing{animation:pulse 1s infinite ease-in-out;}
-@keyframes hintPulse {
-  0% { transform: scale(1); box-shadow: 0 0 0px #fff; }
-  50% { transform: scale(1.2) rotate(2deg); box-shadow: 0 0 25px #fff; border-color: #ffffff !important; background: #334155; }
-  100% { transform: scale(1); box-shadow: 0 0 0px #fff; }
-}
-.hint-target { animation: hintPulse 0.6s infinite ease-in-out; z-index: 100; }
-@keyframes skipAnimate {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  100% { transform: translate(60px, -40px) scale(0.7); opacity: 0; }
-}
+
 .skip-pop { position: absolute; font-size: 20px; font-weight: bold; color: #94a3b8; background: rgba(51,65,85,0.9); padding: 4px 10px; border-radius: 6px; animation: skipAnimate 0.6s forwards ease-out; pointer-events: none; }
 
 /* QRC Reference Overlay Module Layout */
@@ -80,7 +95,62 @@ select:hover, button:hover {background:#334155;}
 .qrc-d {font-size:13px; color:#94a3b8; line-height:1.45;}
 </style>
 </head>
+<div id="aboutModal" style="
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+z-index:2000;
+">
+
+<div style="
+background:#1e293b;
+padding:25px;
+border-radius:12px;
+max-width:500px;
+text-align:left;
+">
+
+<h2>About Formula Hunt</h2>
+
+
+<p>
+Formula Hunt is an interactive formula revision game for JEE aspirants.<br><br>
+
+🎯 Hunt the correct formula among moving cards by selecting a subject, topic, and difficulty level.<br>
+
+📚 Revise and explore formulas anytime using the Formula Directory.
+</p>
+
+<h3>Rules:</h3>
+
+<ul>
+<li>✅ Correct Answer → Score increases</li>
+<li>❌ Wrong Answer → Lose a life</li>
+<li>⏭️ Skip → -10 points</li>
+<li>❤️ 3 Lives total</li>
+<li>🏆 Build combos for higher scores</li>
+</ul>
+
+<p style="font-size:14px;" class="creator">
+    <b>Creator:</b> Shreya Manyam
+</p>
+
+<button onclick="
+document.getElementById('aboutModal').style.display='none'
+">
+Close
+</button>
+
+</div>
+</div>
 <body>
+<button id="aboutBtn">ℹ️</button>
 <div id="top">
 <div id="question-container">
 <div id="question" class="flashing">Press Start to Hunt!</div>
@@ -91,7 +161,6 @@ select:hover, button:hover {background:#334155;}
 <div class="btn-group">
 <select id="level">
 <option value="Beginner">Beginner</option>
-<option value="Intermediate">Intermediate</option>
 <option value="Advanced">Advanced</option>
 </select>
 
@@ -106,7 +175,6 @@ select:hover, button:hover {background:#334155;}
 </select>
 <button id="startBtn">Start Game</button>
 <button id="restartBtn">Restart</button>
-<button id="hintBtn">Hint (-30)</button>
 <button id="skipBtn">Skip (-10)</button>
 
 <button onclick="window.location.href='formulae.html'">
@@ -163,7 +231,7 @@ align-items:center;
     ">
 
         <h1 style="color:#ef4444;">
-            💀 Game Over
+            Game Over 💀 
         </h1>
 
         <div id="gameOverStats"
@@ -189,6 +257,13 @@ align-items:center;
 <script src="data.js"></script>
 
 <script>
+document.getElementById("aboutBtn")
+.addEventListener("click", () => {
+
+    document.getElementById("aboutModal")
+        .style.display = "flex";
+
+});
 window.switchTab = function(e, tabId) {
   document.querySelectorAll('.qrc-grid').forEach(grid => grid.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -213,7 +288,8 @@ window.addEventListener('DOMContentLoaded', () => {
     gameActive=false,
     gamePaused=false,
     velocityMultiplier=1.0,
-    levelScoreFactor=1.0;
+    levelScoreFactor=1.0,
+	displayPool = [];
   const maxVisible = 20;
 
   const arena = document.getElementById("arena");
@@ -227,7 +303,6 @@ window.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById("startBtn");
   const restartBtn = document.getElementById("restartBtn");
   const skipBtn = document.getElementById("skipBtn");
-  const hintBtn = document.getElementById("hintBtn");
   const qrcBtn = document.getElementById("qrcBtn");
   const closeQrcBtn = document.getElementById("closeQrcBtn");
   const qrcModal = document.getElementById("qrcModal");
@@ -371,6 +446,7 @@ document.getElementById("playAgainBtn");
   }
 
   function startGame() {
+	setControlsEnabled(false);
     arena.innerHTML = "";
     score = 0;
 combo = 0;
@@ -391,6 +467,18 @@ updateLivesDisplay();
     const chosenLevel = document.getElementById("level").value;
     const chosenSub = document.getElementById("subject").value;
 	const chosenTopic = document.getElementById("topic").value;
+	displayPool = bank.filter(x => {
+
+    const matchSub =
+        chosenSub === "All" ||
+        x.subject === chosenSub;
+
+    const matchLevel =
+        x.level.includes(chosenLevel);
+
+    return matchSub && matchLevel;
+
+	}).sort(() => Math.random() - 0.5);
 
     if (chosenLevel === "Beginner") {
 	velocityMultiplier = 0.8;
@@ -438,10 +526,12 @@ updateLivesDisplay();
       return;
     }
 
-    const firstCount = Math.min(maxVisible, pool.length);
-    for (let i = 0; i < firstCount; i++) {
-      spawnFormula(pool[i]);
-    }
+    const firstCount =
+    Math.min(maxVisible, displayPool.length);
+
+for(let i = 0; i < firstCount; i++){
+    spawnFormula(displayPool[i]);
+}
     nextQuestion();
     play(500, 900, 0.15); 
   }
@@ -480,9 +570,10 @@ updateLivesDisplay();
       el.remove();
 
       const nextIndex = maxVisible + current;
-      if (nextIndex < pool.length) {
-        spawnFormula(pool[nextIndex]);
-      }
+
+if (nextIndex < displayPool.length) {
+    spawnFormula(displayPool[nextIndex]);
+}
 
       solved++;
 	  current++;
@@ -533,9 +624,9 @@ updateLivesDisplay();
       if (target.dataset.answer === correctAns) {
         target.remove();
         const nextIndex = maxVisible + current;
-        if (nextIndex < pool.length) {
-          spawnFormula(pool[nextIndex]);
-        }
+        if (nextIndex < displayPool.length) {
+    spawnFormula(displayPool[nextIndex]);
+}
         break;
       }
     }
@@ -545,32 +636,6 @@ updateLivesDisplay();
     nextQuestion();
   }
 
-  function triggerHint() {
-    if(!gameActive || gamePaused || current >= pool.length || !question)
-    return;
-    
-    const correctAns = pool[current].a;
-    const targets = document.querySelectorAll(".formula");
-    
-    let targetElement = null;
-    for (let target of targets) {
-      if (target.dataset.answer === correctAns) {
-        targetElement = target;
-        break;
-      }
-    }
-
-    if(targetElement && !targetElement.classList.contains("hint-target")) {
-      score = Math.max(0, score - 30);
-      if(scoreEl) scoreEl.innerText = score;
-      play(600, 800, 0.12);
-
-      targetElement.classList.add("hint-target");
-      setTimeout(() => {
-        if(targetElement) targetElement.classList.remove("hint-target");
-      }, 2500);
-    }
-  }
   
   function resetGame(){
 
@@ -582,6 +647,7 @@ updateLivesDisplay();
     combo = 0;
     skippedCount = 0;
     lives = 3;
+	setControlsEnabled(true);
 
     gameActive = false;
     gamePaused = false;
@@ -614,6 +680,7 @@ function restartGame(){
 }
 
 function gameOver(){
+	
 
     gameActive = false;
     gamePaused = false;
@@ -626,6 +693,7 @@ function gameOver(){
         Skipped: <b>${skippedCount}</b><br>
         Combo: <b>${combo}</b>
     `;
+	setControlsEnabled(true);
 
     gameOverModal.style.display = "flex";
 
@@ -645,6 +713,18 @@ function gameOver(){
     );
 
 }
+}
+
+function setControlsEnabled(enabled){
+
+    document.getElementById("level").disabled =
+        !enabled;
+
+    document.getElementById("subject").disabled =
+        !enabled;
+
+    document.getElementById("topic").disabled =
+        !enabled;
 }
 
   function animate() {
@@ -709,7 +789,6 @@ function gameOver(){
 
 }
   if (skipBtn) skipBtn.addEventListener('click', skipQuestion);
-  if (hintBtn) hintBtn.addEventListener('click', triggerHint);
   if(restartBtn)
     restartBtn.addEventListener(
         'click',
