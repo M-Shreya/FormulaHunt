@@ -6,290 +6,435 @@
 <title>JEE Formula Hunt</title>
 
 <style>
-body{margin:0;background:#0f172a;color:#fff;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;overflow:hidden;user-select:none;}
-#top{height:100px;background:#111827;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #1f2937;}
-
-#aboutBtn{
-    position:fixed;
-    top:15px;
-    left:15px;
-    width:28px;
-    height:28px;
-    background:#2563eb;
-    color:white;
-    font-weight:bold;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    z-index:1000;
-	border-radius:20%
-	outline:none
+:root {
+    --bg: #0b0f19;
+    --text: #f8fafc;
+    --header: #111827;
+    --card: #1e293b;
+    --border: #1e293b;
+    --accent: #10b981;
+    --primary: #3b82f6;
+    --danger: #ef4444;
 }
 
-#aboutBtn:hover{
-    transform:scale(1.1);
+body.light-theme {
+    --bg: #f1f5f9;
+    --text: #0f172a;
+    --header: #ffffff;
+    --card: #ffffff;
+    --border: #cbd5e1;
+    --accent: #059669;
+    --primary: #2563eb;
+    --danger: #dc2626;
 }
 
-/* Safe zone margin to ensure pulsing text animations never scale outside screen viewport boundaries */
-#question-container{flex-grow:1;max-width:45%; margin-left: 45px; padding-left: 10px;}
-#question{font-size:22px;font-weight:bold;margin-bottom:8px;transition:color 0.3s ease;text-shadow: 0 0 10px rgba(255,255,255,0.2);position:relative; transform-origin: left center; line-height: 1.3;}
-#progressWrap{width:100%;max-width:400px;height:12px;background:#334155;border-radius:10px;overflow:hidden;box-shadow:inset 0 2px 4px rgba(0,0,0,0.3);}
-#progress{height:100%;width:0%;background:linear-gradient(90deg, #22c55e, #4ade80);transition:width 0.3s ease;}
-
-#controls{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
-.btn-group{display:flex;gap:6px;flex-wrap: wrap;justify-content: flex-end;}
-.stats-row{font-size:15px;color:#cbd5e1;font-weight:500;}
-.stats-row span{font-weight:bold;color:#f8fafc;}
-#score{color:#38bdf8 !important;}
-#combo{color:#f59e0b !important;}
-#skipped{color:#ef4444 !important;}
-#done{color:#a855f7 !important;}
-
-select, button {background:#1e293b;color:#fff;border:1px solid #475569;padding:6px 12px;border-radius:6px;font-size:14px;cursor:pointer;outline:none;}
-select:hover, button:hover {background:#334155;}
-#startBtn {background:#2563eb;border:none;font-weight:bold;}
-#startBtn:hover {background:#3b82f6;}
-#skipBtn {background:#475569;border:none;font-weight:bold;}
-#skipBtn:hover {background:#64748b;}
-#qrcBtn {background:#059669;border:none;font-weight:bold;}
-#qrcBtn:hover {background:#10b981;}
-#restartBtn{
-    background:#dc2626;
-    border:none;
-    font-weight:bold;
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+    user-select: none;
 }
 
-#restartBtn:hover{
-    background:#ef4444;
+#top {
+    height: auto;
+    background: var(--header);
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
-select:disabled{
-    opacity:0.5;
-    cursor:not-allowed;
+
+@media (min-width: 768px) {
+    #top {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        flex-direction: row;
+        gap: 24px;
+    }
 }
-#arena{position:relative;height:calc(100vh - 120px);overflow:hidden;background:radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);}
-.formula{position:absolute;padding:10px 16px;border-radius:12px;font-weight:bold;font-size:16px;cursor:pointer;background:rgba(15, 23, 42, 0.6);backdrop-filter:blur(4px);box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);transition:transform 0.1s ease, border 0.2s ease, box-shadow 0.2s ease;white-space:nowrap;}
-.formula:hover{transform:scale(1.1);background:rgba(30, 41, 59, 0.8);z-index:10;}
-.popup{position:fixed;font-size:28px;font-weight:900;pointer-events:none;z-index:9999;text-align:center;text-shadow: 0 2px 4px rgba(0,0,0,0.5);font-family:sans-serif;}
 
-@keyframes pulse{0%{transform:scale(1);} 50%{transform:scale(1.04); text-shadow: 0 0 12px currentColor;} 100%{transform:scale(1);}}
-.flashing{animation:pulse 1s infinite ease-in-out;}
+.action-left {
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    justify-content: space-between;
+}
 
-.skip-pop { position: absolute; font-size: 20px; font-weight: bold; color: #94a3b8; background: rgba(51,65,85,0.9); padding: 4px 10px; border-radius: 6px; animation: skipAnimate 0.6s forwards ease-out; pointer-events: none; }
+@media (min-width: 768px) {
+    .action-left {
+        width: auto;
+        justify-content: flex-start;
+    }
+}
 
-/* QRC Reference Overlay Module Layout */
-#qrcModal {display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.97); z-index:10000; overflow-y:auto; padding:30px; box-sizing:border-box;}
-.modal-header {display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #334155; padding-bottom:15px; margin-bottom:20px;}
-.modal-title {font-size:26px; font-weight:bold; color:#10b981;}
-.close-btn {background:#ef4444; border:none; font-size:16px; font-weight:bold; padding:8px 16px; border-radius:6px; color:#fff;}
-.close-btn:hover {background:#f87171;}
-.tabs {display:flex; gap:10px; margin-bottom:20px;}
-.tab-btn {background:#1e293b; padding:10px 20px; border:1px solid #475569; border-radius:6px; font-weight:bold; color:#fff;}
-.tab-btn.active {background:#10b981; border-color:#10b981;}
-.qrc-grid {display:none; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap:18px;}
-.qrc-grid.active {display:grid;}
-.qrc-card {background:#1e293b; border:1px solid #334155; padding:16px; border-radius:10px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); display:flex; flex-direction:column; gap:6px;}
-.qrc-q {font-size:15px; color:#f1f5f9; font-weight:700;}
-.qrc-tag {font-size:11px; color:#10b981; background:rgba(16,185,129,0.1); padding:2px 6px; border-radius:4px; width:fit-content; margin-top:2px;}
-.qrc-a {font-size:19px; color:#38bdf8; font-weight:bold; background:rgba(0,0,0,0.25); padding:8px; border-radius:6px; margin:4px 0; overflow-x: auto; white-space: nowrap; border-left:3px solid #38bdf8;}
-.qrc-d {font-size:13px; color:#94a3b8; line-height:1.45;}
+#victoryModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    z-index: 20000;
+}
+
+#victoryCard {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--accent);
+    padding: 32px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,.5);
+}
+
+#victoryCard h1 {
+    color: var(--accent);
+    margin-top: 0;
+    font-size: 24px;
+}
+
+#victoryPlayAgainBtn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: var(--primary);
+    color: white;
+}
+
+#question-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+#question {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    color: var(--text);
+}
+
+@media (min-width: 768px) {
+    #question {
+        font-size: 20px;
+    }
+}
+
+#progressWrap {
+    width: 100%;
+    max-width: 360px;
+    height: 8px;
+    background: rgba(51, 65, 85, 0.3);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+#progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), #34d399);
+    transition: width 0.3s ease;
+}
+
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    #controls {
+        align-items: flex-end;
+        width: auto;
+    }
+}
+
+.btn-group {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.stats-row {
+    font-size: 12px;
+    color: #94a3b8;
+    font-weight: 500;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media (min-width: 768px) {
+    .stats-row {
+        font-size: 14px;
+        gap: 12px;
+    }
+}
+
+body.light-theme .stats-row {
+    color: #475569;
+}
+
+.stats-row span {
+    font-weight: 700;
+    color: var(--text);
+}
+
+#score { color: #38bdf8 !important; }
+#combo { color: #f59e0b !important; }
+#skipped { color: #f43f5e !important; }
+#done { color: #a855f7 !important; }
+
+select, button {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+@media (min-width: 768px) {
+    select, button {
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+}
+
+select:hover, button:hover {
+    background: rgba(51, 65, 85, 0.2);
+    border-color: #64748b;
+}
+
+#startBtn { background: var(--primary); color: #fff; border: none; }
+#startBtn:hover { background: #60a5fa; }
+#skipBtn { background: #475569; border: none; color: #fff; }
+#skipBtn:hover { background: #64748b; }
+#restartBtn { background: var(--danger); border: none; color: #fff; }
+#restartBtn:hover { opacity: 0.9; }
+
+#arena {
+    position: relative;
+    height: calc(100vh - 180px);
+    overflow: hidden;
+    background: radial-gradient(circle at center, rgba(167, 235, 253, 0.4) 0%, var(--bg) 100%);
+}
+
+@media (min-width: 768px) {
+    #arena {
+        height: calc(100vh - 120px);
+    }
+}
+
+.formula {
+    position: absolute;
+    padding: 8px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s ease, background 0.2s ease;
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    .formula {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+}
+
+body.light-theme .formula {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.formula:hover {
+    transform: scale(1.08);
+    z-index: 10;
+}
+
+.popup {
+    position: fixed;
+    font-size: 20px;
+    font-weight: 800;
+    pointer-events: none;
+    z-index: 9999;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+#aboutModal, #gameOverModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    z-index: 20000;
+}
+
+#aboutCard, #gameOverCard {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 24px;
+    border-radius: 16px;
+    max-width: 480px;
+    width: 90%;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+#gameOverCard {
+    text-align: center;
+    border-top: 4px solid var(--danger);
+}
+
+.hidden-control {
+    display: none !important;
+}
 </style>
 </head>
-<div id="aboutModal" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.8);
-justify-content:center;
-align-items:center;
-z-index:2000;
-">
 
-<div style="
-background:#1e293b;
-padding:25px;
-border-radius:12px;
-max-width:500px;
-text-align:left;
-">
-
-<h2>About Formula Hunt</h2>
-
-
-<p>
-Formula Hunt is an interactive formula revision game for JEE aspirants.<br><br>
-
-🎯 Hunt the correct formula among moving cards by selecting a subject, topic, and difficulty level.<br>
-
-📚 Revise and explore formulas anytime using the Formula Directory.
-</p>
-
-<h3>Rules:</h3>
-
-<ul>
-<li>✅ Correct Answer → Score increases</li>
-<li>❌ Wrong Answer → Lose a life</li>
-<li>⏭️ Skip → -10 points</li>
-<li>❤️ 3 Lives total</li>
-<li>🏆 Build combos for higher scores</li>
-</ul>
-
-<p style="font-size:14px;" class="creator">
-    <b>Creator:</b> Shreya Manyam
-</p>
-
-<button onclick="
-document.getElementById('aboutModal').style.display='none'
-">
-Close
-</button>
-
-</div>
-</div>
 <body>
-<button id="aboutBtn">ℹ️</button>
+
+<div id="aboutModal">
+    <div id="aboutCard">
+        <h2 style="margin-top:0; color:var(--accent);">About Formula Hunt</h2>
+        <p>Formula Hunt is an interactive formula revision game for JEE aspirants.</p>
+        <p>🎯 Hunt the correct formula among moving cards by selecting a subject, topic, and difficulty level.</p>
+        <h3 style="color:var(--primary);">Rules:</h3>
+        <ul style="padding-left:20px; line-height:1.6;">
+            <li>✅ Correct Answer → Score increases</li>
+            <li>❌ Wrong Answer → Lose a life</li>
+            <li>⏭️ Skip → -10 points</li>
+            <li>❤️ 3 Lives total</li>
+        </ul>
+        <p style="font-size:13px; opacity:0.8; margin-bottom:24px;"><b>Creator:</b> Shreya Manyam</p>
+        <button style="width:100%; background:var(--primary); border:none; color:white; padding:12px;" onclick="document.getElementById('aboutModal').style.display='none'">Close</button>
+    </div>
+</div>
+
 <div id="top">
-<div id="question-container">
-<div id="question" class="flashing">Press Start to Hunt!</div>
-<div id="progressWrap"><div id="progress"></div></div>
-</div>
+    <div class="action-left">
+        <button id="aboutBtn">ℹ️ About</button>
+        <button id="themeToggle">☀️ Light</button>
+    </div>
+    
+    <div id="question-container">
+        <div id="question">Press Start to Hunt!</div>
+        <div id="progressWrap"><div id="progress"></div></div>
+    </div>
 
-<div id="controls">
-<div class="btn-group">
-<select id="level">
-<option value="Beginner">Beginner</option>
-<option value="Advanced">Advanced</option>
-</select>
+    <div id="controls">
+        <div class="btn-group">
+            <select id="level">
+                <option value="Beginner">Beginner</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+            <select id="subject">
+                <option value="All">All Subjects</option>
+                <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Maths">Maths</option>
+            </select>
+            <select id="topic">
+                <option value="All">All Topics</option>
+            </select>
+            
+            <button id="startBtn">Start Game</button>
+            <button id="skipBtn" class="hidden-control">Skip (-10)</button>
+            <button id="restartBtn" class="hidden-control">Restart</button>
 
-<select id="subject">
-<option value="All">All Subjects</option>
-<option value="Physics">Physics</option>
-<option value="Chemistry">Chemistry</option>
-<option value="Maths">Maths</option>
-</select>
-<select id="topic">
-<option value="All">All Topics</option>
-</select>
-<button id="startBtn">Start Game</button>
-<button id="restartBtn">Restart</button>
-<button id="skipBtn">Skip (-10)</button>
-
-<button onclick="window.location.href='formulae.html'">
-    📚 Formula Directory
-</button>
-</div>
-<div class="stats-row">
-Score: <span id="score">0</span> |
-Combo: <span id="combo">0</span> |
-Skipped: <span id="skipped">0</span> |
-Progress: <span id="done">0/0</span>
-Lives:<span id="lives">❤️❤️❤️</span>
-</div>
-</div>
+            <button onclick="window.location.href='formulae.html'">📚 Directory</button>
+        </div>
+        <div class="stats-row">
+            <div>Score: <span id="score">0</span></div>
+            <div>Combo: <span id="combo">0</span></div>
+            <div>Skipped: <span id="skipped">0</span></div>
+            <div>Progress: <span id="done">0/0</span></div>
+            <div>Lives: <span id="lives">❤️❤️❤️</span></div>
+        </div>
+    </div>
 </div>
 
 <div id="arena"></div>
 
-<div id="qrcModal">
-  <div class="modal-header">
-    <div class="modal-title">📖 Comprehensive JEE Formula Reference Directory (QRC)</div>
-    <button class="close-btn" id="closeQrcBtn">Close Directory</button>
-  </div>
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab(event, 'qrc-physics')">Physics</button>
-    <button class="tab-btn" onclick="switchTab(event, 'qrc-chemistry')">Chemistry</button>
-    <button class="tab-btn" onclick="switchTab(event, 'qrc-maths')">Mathematics</button>
-  </div>
-  <div id="qrc-physics" class="qrc-grid active"></div>
-  <div id="qrc-chemistry" class="qrc-grid"></div>
-  <div id="qrc-maths" class="qrc-grid"></div>
+<div id="gameOverModal">
+    <div id="gameOverCard">
+        <h1 style="color:var(--danger); margin-top:0;">Game Over 💀</h1>
+        <div id="gameOverStats" style="font-size:16px; line-height:2; margin:20px 0;"></div>
+        <button id="playAgainBtn" style="width:100%; padding:12px; background:var(--primary); border:none; color:white;">Play Again</button>
+    </div>
 </div>
+<div id="victoryModal">
+    <div id="victoryCard">
+        <h1>Formula Hunt Complete! 🏆</h1>
 
-<div id="gameOverModal" style="
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.85);
-z-index:20000;
-justify-content:center;
-align-items:center;
-">
+        <div id="victoryStats"></div>
 
-    <div style="
-    background:#1e293b;
-    padding:30px;
-    border-radius:15px;
-    min-width:350px;
-    text-align:center;
-    border:2px solid #ef4444;
-    ">
-
-        <h1 style="color:#ef4444;">
-            Game Over 💀 
-        </h1>
-
-        <div id="gameOverStats"
-             style="font-size:18px;line-height:1.8;">
-        </div>
-
-        <button id="playAgainBtn"
-                style="
-                margin-top:20px;
-                padding:10px 20px;
-                background:#2563eb;
-                border:none;
-                border-radius:8px;
-                color:white;
-                font-weight:bold;">
+        <button id="victoryPlayAgainBtn">
             Play Again
         </button>
-
     </div>
-
 </div>
 
 <script src="data.js"></script>
 
 <script>
-document.getElementById("aboutBtn")
-.addEventListener("click", () => {
-
-    document.getElementById("aboutModal")
-        .style.display = "flex";
-
-});
-window.switchTab = function(e, tabId) {
-  document.querySelectorAll('.qrc-grid').forEach(grid => grid.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  document.getElementById(tabId).classList.add('active');
-  if (e && e.currentTarget) e.currentTarget.classList.add('active');
-};
-
-
 window.addEventListener('DOMContentLoaded', () => {
-  const praise=["Well Done!","Awesome!","Great!","Excellent!","Superb!","Brilliant!","Keep Going!","Genius!","Unstoppable!"];
-  const colors=["#ff6b6b","#4ecdc4","#ffe66d","#74b9ff","#fd79a8","#55efc4","#a29bfe","#feca57","#ff9ff3","#00d2d3"];
+  // Disable right-click context menu
+  document.addEventListener('contextmenu', event => event.preventDefault());
 
-  
+  // Block common DevTools keyboard shortcuts
+  document.addEventListener('keydown', event => {
+    if (event.key === 'F12') {
+      event.preventDefault();
+    }
+    if (event.ctrlKey && event.shiftKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) {
+      event.preventDefault();
+    }
+    if (event.metaKey && event.altKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) {
+      event.preventDefault();
+    }
+  });
 
-  let current=0,
-	solved=0,
-    score=0,
-    combo=0,
-	lives=3,
-    skippedCount=0,
-    pool=[],
-    gameActive=false,
-    gamePaused=false,
-    velocityMultiplier=1.0,
-    levelScoreFactor=1.0,
-	displayPool = [];
+  const praise = ["Well Done!", "Awesome!", "Great!", "Excellent!", "Superb!", "Brilliant!", "Keep Going!", "Genius!", "Unstoppable!"];
+  const colors = ["#3b82f6", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6", "#06b6d4", "#f43f5e", "#14b8a6"];
+
+  let current = 0, solved = 0, score = 0, combo = 0, lives = 3, skippedCount = 0;
+  let pool = [], gameActive = false, gamePaused = false, velocityMultiplier = 1.0, levelScoreFactor = 1.0, displayPool = [];
   const maxVisible = 20;
 
   const arena = document.getElementById("arena");
@@ -303,74 +448,52 @@ window.addEventListener('DOMContentLoaded', () => {
   const startBtn = document.getElementById("startBtn");
   const restartBtn = document.getElementById("restartBtn");
   const skipBtn = document.getElementById("skipBtn");
-  const qrcBtn = document.getElementById("qrcBtn");
-  const closeQrcBtn = document.getElementById("closeQrcBtn");
-  const qrcModal = document.getElementById("qrcModal");
-  const gameOverModal =
-document.getElementById("gameOverModal");
+  const gameOverModal = document.getElementById("gameOverModal");
+  const gameOverStats = document.getElementById("gameOverStats");
+  const playAgainBtn = document.getElementById("playAgainBtn");
+  const themeBtn = document.getElementById("themeToggle");
+  const levelSelect = document.getElementById("level");
+  const subjectSelect = document.getElementById("subject");
+  const victoryModal = document.getElementById("victoryModal");
+  const victoryStats = document.getElementById("victoryStats");
+  const victoryPlayAgainBtn = document.getElementById("victoryPlayAgainBtn");
 
-const gameOverStats =
-document.getElementById("gameOverStats");
+victoryPlayAgainBtn.onclick = () => {
+    victoryModal.style.display = "none";
+    resetGame();
+};
 
-const playAgainBtn =
-document.getElementById("playAgainBtn");
-  
-  function updateTopics() {
-
-    const subject =
-        document.getElementById("subject").value;
-
-    topicSelect.innerHTML =
-        '<option value="All">All Topics</option>';
-
-    if(subject === "All")
-        return;
-
-    const topics = new Set();
-
-    bank.forEach(item => {
-
-        if(item.subject === subject)
-            topics.add(item.topic);
-
-    });
-
-    [...topics]
-        .forEach(topic => {
-
-            const option =
-                document.createElement("option");
-
-            option.value = topic;
-            option.textContent = topic;
-
-            topicSelect.appendChild(option);
-        });
-}
-  
- 
-  function buildQrcDirectory() {
-    const physDiv = document.getElementById("qrc-physics");
-    const chemDiv = document.getElementById("qrc-chemistry");
-    const mathDiv = document.getElementById("qrc-maths");
-    
-    bank.forEach(item => {
-      const card = document.createElement("div");
-      card.className = "qrc-card";
-      card.innerHTML = `
-        <div class="qrc-q">${item.q}</div>
-        <div class="qrc-tag">${item.level}</div>
-        <div class="qrc-a">${escapeHtml(item.a)}</div>
-        <div class="qrc-d">${item.d}</div>
-      `;
-      if(item.subject === "Physics") physDiv.appendChild(card);
-      if(item.subject === "Chemistry") chemDiv.appendChild(card);
-      if(item.subject === "Maths") mathDiv.appendChild(card);
-    });
+  if(localStorage.getItem("theme") === "light"){
+      document.body.classList.add("light-theme");
+      themeBtn.textContent = "🌙 Dark";
   }
 
-  function escapeHtml(str) {
-    return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  themeBtn.onclick = () => {
+      document.body.classList.toggle("light-theme");
+      if(document.body.classList.contains("light-theme")){
+          localStorage.setItem("theme", "light");
+          themeBtn.textContent = "🌙 Dark";
+      }else{
+          localStorage.setItem("theme", "dark");
+          themeBtn.textContent = "☀️ Light";
+      }
+  };
+
+  document.getElementById("aboutBtn").addEventListener("click", () => {
+      document.getElementById("aboutModal").style.display = "flex";
+  });
+
+  function updateTopics() {
+      const subject = subjectSelect.value;
+      topicSelect.innerHTML = '<option value="All">All Topics</option>';
+      if(subject === "All") return;
+      const topics = new Set();
+      bank.forEach(item => { if(item.subject === subject) topics.add(item.topic); });
+      [...topics].forEach(topic => {
+          const option = document.createElement("option");
+          option.value = topic; option.textContent = topic;
+          topicSelect.appendChild(option);
+      });
   }
 
   function play(freq1, freq2, dur) {
@@ -385,238 +508,183 @@ document.getElementById("playAgainBtn");
       o.connect(g); g.connect(c.destination);
       g.gain.value = 0.04;
       o.start(); o.stop(c.currentTime + dur);
-    } catch(err) {
-      console.log("Audio skipped cleanly.");
-    }
+    } catch(err) { console.log("Audio dropped cleanly."); }
   }
 
   function popup(text, x, y, color) {
     const d = document.createElement("div");
     d.className = "popup";
     d.innerHTML = text;
-    d.style.left = x + "px";
-    d.style.top = y + "px";
-    d.style.color = color;
+    d.style.left = x + "px"; d.style.top = y + "px"; d.style.color = color;
     document.body.appendChild(d);
-    
-    let tx = window.innerWidth - 180, ty = 40;
-    let sx = x, sy = y, step = 0;
+    let tx = window.innerWidth - 180, ty = 40, step = 0;
     let t = setInterval(() => {
       step += 0.04;
-      d.style.left = (sx + (tx - sx) * step) + "px";
-      d.style.top = (sy + (ty - sy) * step) + "px";
+      d.style.left = (x + (tx - x) * step) + "px";
+      d.style.top = (y + (ty - y) * step) + "px";
       d.style.opacity = 1 - step;
       if (step >= 1) { clearInterval(t); d.remove(); }
     }, 20);
   }
   
   function updateLivesDisplay(){
-
     const livesEl = document.getElementById("lives");
+    livesEl.innerText = lives > 0 ? "❤️".repeat(lives) : "💀";
+  }
 
-    if(lives === 3)
-        livesEl.innerText = "❤️❤️❤️";
-    else if(lives === 2)
-        livesEl.innerText = "❤️❤️";
-    else if(lives === 1)
-        livesEl.innerText = "❤️";
-    else
-        livesEl.innerText = "💀";
+  function showVictory() {
+
+    gameActive = false;
+    gamePaused = false;
+
+    victoryStats.innerHTML = `
+        <div style="font-size:18px;line-height:2;">
+            Final Score: <b>${score}</b><br>
+            Solved: <b>${solved}</b><br>
+            Skipped: <b>${skippedCount}</b><br>
+            Remaining Lives: <b>${lives}</b><br>
+            Best Combo: <b>${combo}</b>
+        </div>
+
+        <div style="margin-top:20px;font-size:15px;color:var(--accent);">
+            🎉 Congratulations! <br>
+            You successfully hunted every formula! 
+            <br>
+            <br>
+        </div>
+    `;
+
+    victoryModal.style.display = "flex";
+
+    play(500,1200,0.4);
 }
 
   function spawnFormula(item) {
     if (!item) return;
     const e = document.createElement("div");
     e.className = "formula";
-    e.innerText = item.a;
+    e.innerHTML = item.a;
     e.dataset.answer = item.a;
-
     const c = colors[Math.floor(Math.random() * colors.length)];
-    e.style.color = c;
-    e.style.border = "2px solid " + c;
-
-    e.style.left = Math.max(15, Math.random() * (window.innerWidth - 300)) + "px";
-    e.style.top = Math.max(15, Math.random() * (window.innerHeight - 260)) + "px";
-
+    
+    if(document.body.classList.contains("light-theme")){
+        e.style.color = c;
+        e.style.border = "1px solid " + c;
+    } else {
+        e.style.color = c;
+        e.style.border = "1px solid " + c;
+    }
+    
+    // Adjusted bounds to prevent spawning partially hidden layout boxes on mobile views
+    e.style.left = Math.max(10, Math.random() * (window.innerWidth - 180)) + "px";
+    e.style.top = Math.max(10, Math.random() * (arena.clientHeight - 60)) + "px";
     e.vx = (Math.random() * 0.5 + 0.3) * (Math.random() < .5 ? -1 : 1) * velocityMultiplier;
     e.vy = (Math.random() * 0.5 + 0.3) * (Math.random() < .5 ? -1 : 1) * velocityMultiplier;
-
     e.onclick = (ev) => handleClick(ev, e);
     arena.appendChild(e);
   }
 
   function startGame() {
-	setControlsEnabled(false);
+    setViewState(true);
     arena.innerHTML = "";
-    score = 0;
-combo = 0;
-current = 0;
-solved = 0;
-done.innerText = "0/0";
-progress.style.width = "0%";
-skippedCount = 0;
-lives = 3;
-
-updateLivesDisplay();
-    
-    if(scoreEl) scoreEl.innerText = score;
-    if(comboEl) comboEl.innerText = combo;
-    if(skippedEl) skippedEl.innerText = skippedCount;
+    score = 0; combo = 0; current = 0; solved = 0;
+    done.innerText = "0/0"; progress.style.width = "0%"; skippedCount = 0; lives = 3;
+    updateLivesDisplay();
+    scoreEl.innerText = score; comboEl.innerText = combo; skippedEl.innerText = skippedCount;
     gameActive = true;
 
-    const chosenLevel = document.getElementById("level").value;
-    const chosenSub = document.getElementById("subject").value;
-	const chosenTopic = document.getElementById("topic").value;
+    const chosenLevel = levelSelect.value;
+    const chosenSub = subjectSelect.value;
+	const chosenTopic = topicSelect.value;
+
 	displayPool = bank.filter(x => {
-
-    const matchSub =
-        chosenSub === "All" ||
-        x.subject === chosenSub;
-
-    const matchLevel =
-        x.level.includes(chosenLevel);
-
-    return matchSub && matchLevel;
-
+        return (chosenSub === "All" || x.subject === chosenSub) && x.level.includes(chosenLevel);
 	}).sort(() => Math.random() - 0.5);
 
-    if (chosenLevel === "Beginner") {
-	velocityMultiplier = 0.8;
-	levelScoreFactor = 0.8;
-	}
-	else if (chosenLevel === "Intermediate") {
-	velocityMultiplier = 1.3;
-	levelScoreFactor = 1.0;
-	}
-	else if (chosenLevel === "Advanced") {
-	velocityMultiplier = 2.1;
-	levelScoreFactor = 1.6;
-	}
-	else {
-	velocityMultiplier = 1.3;
-	levelScoreFactor = 1.0;
-	}
+    if (chosenLevel === "Beginner") { velocityMultiplier = 0.8; levelScoreFactor = 0.8; }
+	else { velocityMultiplier = 1.8; levelScoreFactor = 1.5; }
     
     pool = bank.filter(x => {
-
-    const matchSub =
-        chosenSub === "All" ||
-        x.subject === chosenSub;
-
-    const matchLevel =
-        x.level.includes(chosenLevel);
-
-    const matchTopic =
-        chosenTopic === "All" ||
-        x.topic === chosenTopic;
-
-    return (
-        matchSub &&
-        matchLevel &&
-        matchTopic
-    );
-});
-
-    pool = pool.sort(() => Math.random() - 0.5);
+        return (chosenSub === "All" || x.subject === chosenSub) && 
+               x.level.includes(chosenLevel) && 
+               (chosenTopic === "All" || x.topic === chosenTopic);
+    }).sort(() => Math.random() - 0.5);
 
     if (pool.length === 0) {
-      question.innerHTML = "No formulas match this choice pattern selection!";
-      question.style.color = "#ef4444";
+      question.innerHTML = "No formulas found!";
+      question.style.color = "var(--danger)";
       gameActive = false;
+      setViewState(false);
       return;
     }
 
-    const firstCount =
-    Math.min(maxVisible, displayPool.length);
-
-for(let i = 0; i < firstCount; i++){
-    spawnFormula(displayPool[i]);
-}
+    const firstCount = Math.min(maxVisible, displayPool.length);
+    let visiblePool = displayPool.slice(0, firstCount);
+    const correctFormula = pool[0];
+    if(correctFormula && !visiblePool.some(x => x.a === correctFormula.a)){
+        visiblePool[firstCount - 1] = correctFormula;
+    }
+    visiblePool.forEach(spawnFormula);
     nextQuestion();
     play(500, 900, 0.15); 
   }
 
   function nextQuestion() {
-    if (!question || !progress || !done) return;
     if (current >= pool.length) {
-      question.innerHTML = "🏆 Formula Hunt Complete!";
-      question.style.color = "#00ff66";
-      progress.style.width = "100%";
-      done.innerText = solved + "/" + pool.length;
-      gameActive = false;
-      return;
+    progress.style.width = "100%";
+    done.innerText = solved + "/" + pool.length;
+    setViewState(false);
+    showVictory();
+    return;
     }
-    
-    question.innerHTML = `<span style="font-size:12px; text-transform:uppercase; letter-spacing:1px; opacity:0.75; color:#94a3b8;">[${pool[current].subject} - ${document.getElementById("level").value}]</span><br>${pool[current].q}`;
-    question.style.color = colors[Math.floor(Math.random() * colors.length)];
+    question.innerHTML = pool[current].q;
+
+    const correctAns = pool[current].a;
+
+    const exists = [...document.querySelectorAll(".formula")]
+        .some(f => f.dataset.answer === correctAns);
+
+    if (!exists) {
+        spawnFormula(pool[current]);
+    }
+
     done.innerText = solved + "/" + pool.length;
     progress.style.width = ((solved / pool.length) * 100) + "%";
-  }
+}
 
   function handleClick(ev, el) {
-    if(!gameActive || gamePaused || current >= pool.length)
-    return;
+    if(!gameActive || gamePaused || current >= pool.length) return;
     const correct = pool[current].a;
 
     if (el.dataset.answer === correct) {
       let pts = Math.round((100 + combo * 10) * levelScoreFactor);
-      score += pts;
-      combo++;
-
+      score += pts; combo++;
       play(500, 900, 0.15);
       const rewardMsg = praise[Math.floor(Math.random() * praise.length)];
-      popup(`+${pts}<br><span style="font-size:15px;">${rewardMsg}</span>`, ev.clientX, ev.clientY, "#22c55e");
-
+      popup(`+${pts} ${rewardMsg}`, ev.clientX, ev.clientY, "#10b981");
       el.remove();
 
       const nextIndex = maxVisible + current;
-
-if (nextIndex < displayPool.length) {
-    spawnFormula(displayPool[nextIndex]);
-}
-
-      solved++;
-	  current++;
-
+      if (nextIndex < displayPool.length) spawnFormula(displayPool[nextIndex]);
+      solved++; current++;
       nextQuestion();
     } else {
       score = Math.max(0, score - Math.round(25 * levelScoreFactor));
 	  lives--;
-
-updateLivesDisplay();
-	if(lives <= 0){
-    gameOver();
-    }
+      updateLivesDisplay();
+	  if(lives <= 0) { gameOver(); return; }
       combo = 0;
       play(300, 120, 0.25);
-      popup("-" + Math.round(25 * levelScoreFactor), ev.clientX, ev.clientY, "#ef4444");
+      popup("-" + Math.round(25 * levelScoreFactor), ev.clientX, ev.clientY, "var(--danger)");
     }
-
-    if(scoreEl) scoreEl.innerText = score;
-    if(comboEl) comboEl.innerText = combo;
+    scoreEl.innerText = score; comboEl.innerText = combo;
   }
 
   function skipQuestion() {
-    if(!gameActive || gamePaused || current >= pool.length || !question)
-    return;
-
-    const pBox = document.createElement("div");
-    pBox.className = "skip-pop";
-    pBox.innerText = "Skipped!";
-    pBox.style.left = "25px";
-    pBox.style.top = "10px";
-    question.appendChild(pBox);
-    setTimeout(() => pBox.remove(), 600);
-
+    if(!gameActive || gamePaused || current >= pool.length) return;
     play(400, 150, 0.2);
-
-    score = Math.max(0, score - 10);
-    combo = 0;
-    skippedCount++;
-    
-    if(scoreEl) scoreEl.innerText = score;
-    if(comboEl) comboEl.innerText = combo;
-    if(skippedEl) skippedEl.innerText = skippedCount;
+    score = Math.max(0, score - 10); combo = 0; skippedCount++;
+    scoreEl.innerText = score; comboEl.innerText = combo; skippedEl.innerText = skippedCount;
 
     const correctAns = pool[current].a;
     const targets = document.querySelectorAll(".formula");
@@ -624,185 +692,97 @@ updateLivesDisplay();
       if (target.dataset.answer === correctAns) {
         target.remove();
         const nextIndex = maxVisible + current;
-        if (nextIndex < displayPool.length) {
-    spawnFormula(displayPool[nextIndex]);
-}
+        if (nextIndex < displayPool.length) spawnFormula(displayPool[nextIndex]);
         break;
       }
     }
-
-    
-	current++;
-    nextQuestion();
+	current++; nextQuestion();
   }
 
-  
   function resetGame(){
-
     arena.innerHTML = "";
-
-    current = 0;
-    solved = 0;
-    score = 0;
-    combo = 0;
-    skippedCount = 0;
-    lives = 3;
-	setControlsEnabled(true);
-
-    gameActive = false;
-    gamePaused = false;
-
+    current = 0; solved = 0; score = 0; combo = 0; skippedCount = 0; lives = 3;
+    setViewState(false);
+    gameActive = false; gamePaused = false;
     updateLivesDisplay();
-
-    scoreEl.innerText = "0";
-    comboEl.innerText = "0";
-    skippedEl.innerText = "0";
-
-    progress.style.width = "0%";
-    done.innerText = "0/0";
-
+    scoreEl.innerText = "0"; comboEl.innerText = "0"; skippedEl.innerText = "0";
+    progress.style.width = "0%"; done.innerText = "0/0";
     question.innerHTML = "Press Start to Hunt!";
-
     startBtn.textContent = "Start Game";
-
     gameOverModal.style.display = "none";
-}
+  }
 
-function restartGame(){
-
-    if(!confirm(
-        "Restart game?\n\nCurrent progress will be lost."
-    )){
-        return;
-    }
-
-    resetGame();
-}
-
-function gameOver(){
-	
-
-    gameActive = false;
-    gamePaused = false;
-
+  function gameOver(){
+    gameActive = false; gamePaused = false;
     arena.innerHTML = "";
-
     gameOverStats.innerHTML = `
         Score: <b>${score}</b><br>
         Solved: <b>${solved}</b><br>
         Skipped: <b>${skippedCount}</b><br>
-        Combo: <b>${combo}</b>
+        Max Combo: <b>${combo}</b>
     `;
-	setControlsEnabled(true);
-
+    setViewState(false);
     gameOverModal.style.display = "flex";
-
     startBtn.textContent = "Start Game";
-	if(playAgainBtn){
+  }
 
-    playAgainBtn.addEventListener(
-        "click",
-        () => {
+  function setViewState(isPlaying) {
+      if (isPlaying) {
+          levelSelect.classList.add("hidden-control");
+          subjectSelect.classList.add("hidden-control");
+          topicSelect.classList.add("hidden-control");
+          skipBtn.classList.remove("hidden-control");
+          restartBtn.classList.remove("hidden-control");
+          startBtn.textContent = "Stop";
+      } else {
+          levelSelect.classList.remove("hidden-control");
+          subjectSelect.classList.remove("hidden-control");
+          topicSelect.classList.remove("hidden-control");
+          skipBtn.classList.add("hidden-control");
+          restartBtn.classList.add("hidden-control");
+          startBtn.textContent = "Start Game";
+      }
+  }
 
-            gameOverModal.style.display =
-                "none";
+  playAgainBtn.onclick = () => resetGame();
+  
+  skipBtn.addEventListener('click', skipQuestion);
+  restartBtn.addEventListener('click', () => { if(confirm("Are you sure you want to restart? Current progress will be lost.")) resetGame(); });
 
-            resetGame();
-
-        }
-    );
-
-}
-}
-
-function setControlsEnabled(enabled){
-
-    document.getElementById("level").disabled =
-        !enabled;
-
-    document.getElementById("subject").disabled =
-        !enabled;
-
-    document.getElementById("topic").disabled =
-        !enabled;
-}
+  startBtn.addEventListener('click', () => {
+      if(!gameActive){
+		  startGame();
+	  } else if(!gamePaused){
+          gamePaused = true;
+          startBtn.textContent = "Resume";
+      } else {
+          gamePaused = false;
+          startBtn.textContent = "Stop";
+      }
+  });
 
   function animate() {
-    const elements = document.querySelectorAll(".formula");
-    const arenaWidth = arena.clientWidth;
-    const arenaHeight = arena.clientHeight;
-	
-	if(gamePaused){
-    requestAnimationFrame(animate);
-    return;
-}
-    elements.forEach(el => {
-      let x = parseFloat(el.style.left) || 0;
-      let y = parseFloat(el.style.top) || 0;
-
-      x += el.vx; 
-      y += el.vy;
-
-      if (x <= 0) { x = 0; el.vx *= -1; }
-      else if (x + el.offsetWidth >= arenaWidth) { x = arenaWidth - el.offsetWidth; el.vx *= -1; }
-
-      if (y <= 0) { y = 0; el.vy *= -1; }
-      else if (y + el.offsetHeight >= arenaHeight) { y = arenaHeight - el.offsetHeight; el.vy *= -1; }
-
-      el.style.left = x + "px";
-      el.style.top = y + "px";
-    });
+    if(!gamePaused) {
+        const elements = document.querySelectorAll(".formula");
+        const arenaWidth = arena.clientWidth;
+        const arenaHeight = arena.clientHeight;
+        elements.forEach(el => {
+          let x = parseFloat(el.style.left) || 0;
+          let y = parseFloat(el.style.top) || 0;
+          x += el.vx; y += el.vy;
+          if (x <= 0) { x = 0; el.vx *= -1; }
+          else if (x + el.offsetWidth >= arenaWidth) { x = arenaWidth - el.offsetWidth; el.vx *= -1; }
+          if (y <= 0) { y = 0; el.vy *= -1; }
+          else if (y + el.offsetHeight >= arenaHeight) { y = arenaHeight - el.offsetHeight; el.vy *= -1; }
+          el.style.left = x + "px"; el.style.top = y + "px";
+        });
+    }
     requestAnimationFrame(animate);
   }
 
-  if (qrcBtn) qrcBtn.addEventListener('click', () => { qrcModal.style.display = "block"; });
-  if (closeQrcBtn) closeQrcBtn.addEventListener('click', () => { qrcModal.style.display = "none"; });
-
-  if(startBtn){
-
-    startBtn.addEventListener('click', () => {
-
-        if(!gameActive){
-
-		startGame();
-
-		gamePaused = false;
-
-		startBtn.textContent = 	"Stop";
-		}
-        else if(!gamePaused){
-
-            gamePaused = true;
-
-            startBtn.textContent = "Resume";
-
-        }
-        else{
-
-            gamePaused = false;
-
-            startBtn.textContent = "Stop";
-
-        }
-
-    });
-
-}
-  if (skipBtn) skipBtn.addEventListener('click', skipQuestion);
-  if(restartBtn)
-    restartBtn.addEventListener(
-        'click',
-        restartGame
-    );
-  
-  
-  buildQrcDirectory();
+  subjectSelect.addEventListener("change", updateTopics);
+  updateTopics();
   animate();
-  document
-.getElementById("subject")
-.addEventListener("change", updateTopics);
-
-updateTopics();
 });
 </script>
 </body>
