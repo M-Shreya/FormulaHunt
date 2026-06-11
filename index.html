@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <title>JEE Formula Hunt</title>
 
 <style>
@@ -35,10 +35,13 @@ body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     overflow: hidden;
     user-select: none;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Fixed viewport container setup */
 }
 
 #top {
-    height: auto;
+    flex-shrink: 0; /* Prevents header from being squished */
     background: var(--header);
     padding: 12px 16px;
     display: flex;
@@ -48,6 +51,7 @@ body {
     border-bottom: 1px solid var(--border);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
+    width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -122,7 +126,7 @@ body {
 }
 
 #question {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     margin-bottom: 6px;
     line-height: 1.3;
@@ -178,9 +182,10 @@ body {
     display: flex;
     gap: 4px;
     align-items: center;
-    flex-wrap: nowrap; /* Forces single line execution tracking on mobile */
+    flex-wrap: nowrap;
     justify-content: center;
     width: 100%;
+    box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
@@ -227,7 +232,7 @@ select, button {
     background: var(--card);
     color: var(--text);
     border: 1px solid var(--border);
-    padding: 6px 8px;
+    padding: 8px 6px;
     border-radius: 6px;
     font-size: 11px;
     font-weight: 600;
@@ -235,14 +240,19 @@ select, button {
     transition: all 0.2s ease;
     outline: none;
     white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
-/* Adjust button scaling so four items lock tightly side-by-side */
 @media (max-width: 767px) {
     .btn-group button, .btn-group select {
         flex: 1;
+        min-width: 0; /* Allows elements to shrink below content size safely */
         text-align: center;
-        padding: 8px 4px;
+    }
+    /* Let the topic windows stay readable but bound safely */
+    #topic {
+        flex: 1.4; 
     }
 }
 
@@ -268,15 +278,10 @@ select:hover, button:hover {
 
 #arena {
     position: relative;
-    height: calc(100vh - 170px);
+    flex-grow: 1; /* Automatically consumes exactly what is left of viewport height */
+    width: 100%;
     overflow: hidden;
-    background: radial-gradient(circle at center, rgba(30, 27, 75, 0.4) 0%, var(--bg) 100%);
-}
-
-@media (min-width: 768px) {
-    #arena {
-        height: calc(100vh - 120px);
-    }
+    background: radial-gradient(circle at center, rgba(163, 239, 254, 0.344) 0%, var(--bg) 100%);
 }
 
 .formula {
@@ -395,26 +400,26 @@ body.light-theme .formula {
                 <option value="Advanced">Advanced</option>
             </select>
             <select id="subject">
-                <option value="All">All Subjects</option>
+                <option value="All">All</option>
                 <option value="Physics">Physics</option>
-                <option value="Chemistry">Chemistry</option>
+                <option value="Chemistry">Chem</option>
                 <option value="Maths">Maths</option>
             </select>
             <select id="topic">
                 <option value="All">All Topics</option>
             </select>
             
-            <button id="startBtn">Start Game</button>
+            <button id="startBtn">Start</button>
             <button id="skipBtn" class="hidden-control">Skip</button>
             <button id="restartBtn" class="hidden-control">Restart</button>
 
-            <button onclick="window.location.href='formulae.html'">📚 Directory</button>
+            <button onclick="window.location.href='formulae.html'">📚 Dir</button>
         </div>
         <div class="stats-row">
             <div>Score: <span id="score">0</span></div>
             <div>Combo: <span id="combo">0</span></div>
             <div>Skipped: <span id="skipped">0</span></div>
-            <div>Progress: <span id="done">0/0</span></div>
+            <div>Prog: <span id="done">0/0</span></div>
             <div>Lives: <span id="lives">❤️❤️❤️</span></div>
         </div>
     </div>
