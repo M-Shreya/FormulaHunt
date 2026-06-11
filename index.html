@@ -37,17 +37,16 @@ body {
     user-select: none;
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Fixed viewport container setup */
+    height: 100vh;
 }
 
 #top {
-    flex-shrink: 0; /* Prevents header from being squished */
+    flex-shrink: 0;
     background: var(--header);
-    padding: 12px 16px;
+    padding: 8px 12px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 12px;
+    gap: 8px;
     border-bottom: 1px solid var(--border);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
@@ -56,64 +55,42 @@ body {
 
 @media (min-width: 768px) {
     #top {
-        padding: 16px 24px;
+        padding: 10px 20px;
         display: grid;
         grid-template-columns: auto 1fr auto;
-        flex-direction: row;
-        gap: 24px;
+        align-items: center;
+        gap: 16px;
+    }
+}
+
+.header-actions-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .header-actions-wrap {
+        display: contents;
     }
 }
 
 .action-left {
     display: flex;
     gap: 8px;
-    width: 100%;
-    justify-content: space-between;
+    order: 1;
+}
+
+.action-right {
+    display: flex;
+    gap: 8px;
+    order: 2;
 }
 
 @media (min-width: 768px) {
-    .action-left {
-        width: auto;
-        justify-content: flex-start;
-    }
-}
-
-#victoryModal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(4px);
-    justify-content: center;
-    align-items: center;
-    z-index: 20000;
-}
-
-#victoryCard {
-    background: var(--card);
-    color: var(--text);
-    border: 1px solid var(--border);
-    border-top: 4px solid var(--accent);
-    padding: 32px;
-    border-radius: 16px;
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,.5);
-}
-
-#victoryCard h1 {
-    color: var(--accent);
-    margin-top: 0;
-    font-size: 24px;
-}
-
-#victoryPlayAgainBtn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    background: var(--primary);
-    color: white;
+    .action-left { order: 1; }
+    .action-right { order: 3; }
 }
 
 #question-container {
@@ -123,36 +100,34 @@ body {
     align-items: center;
     text-align: center;
     width: 100%;
+    order: 3;
+    gap: 4px;
+}
+
+@media (min-width: 768px) {
+    #question-container {
+        order: 2;
+    }
 }
 
 #question {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
-    margin-bottom: 6px;
-    line-height: 1.3;
+    line-height: 1.2;
     color: var(--text);
 }
 
 @media (min-width: 768px) {
-    #question {
-        font-size: 20px;
-        margin-bottom: 8px;
-    }
+    #question { font-size: 18px; }
 }
 
 #progressWrap {
     width: 100%;
-    max-width: 360px;
-    height: 6px;
+    max-width: 280px;
+    height: 5px;
     background: rgba(51, 65, 85, 0.3);
     border-radius: 999px;
     overflow: hidden;
-}
-
-@media (min-width: 768px) {
-    #progressWrap {
-        height: 8px;
-    }
 }
 
 #progress {
@@ -166,15 +141,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     width: 100%;
+    order: 4;
 }
 
 @media (min-width: 768px) {
     #controls {
-        align-items: flex-end;
-        gap: 12px;
-        width: auto;
+        grid-column: 1 / span 3;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 2px;
     }
 }
 
@@ -182,7 +159,6 @@ body {
     display: flex;
     gap: 4px;
     align-items: center;
-    flex-wrap: nowrap;
     justify-content: center;
     width: 100%;
     box-sizing: border-box;
@@ -190,7 +166,6 @@ body {
 
 @media (min-width: 768px) {
     .btn-group {
-        gap: 8px;
         width: auto;
     }
 }
@@ -200,18 +175,13 @@ body {
     color: #94a3b8;
     font-weight: 500;
     display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
+    gap: 8px;
     justify-content: center;
     width: 100%;
 }
 
 @media (min-width: 768px) {
-    .stats-row {
-        font-size: 14px;
-        gap: 12px;
-        width: auto;
-    }
+    .stats-row { font-size: 13px; gap: 12px; width: auto; }
 }
 
 body.light-theme .stats-row {
@@ -232,36 +202,25 @@ select, button {
     background: var(--card);
     color: var(--text);
     border: 1px solid var(--border);
-    padding: 8px 6px;
+    padding: 6px 10px;
     border-radius: 6px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
     outline: none;
     white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
 }
 
 @media (max-width: 767px) {
     .btn-group button, .btn-group select {
         flex: 1;
-        min-width: 0; /* Allows elements to shrink below content size safely */
+        min-width: 0;
         text-align: center;
+        padding: 6px 4px;
+        font-size: 11px;
     }
-    /* Let the topic windows stay readable but bound safely */
-    #topic {
-        flex: 1.4; 
-    }
-}
-
-@media (min-width: 768px) {
-    select, button {
-        padding: 8px 14px;
-        font-size: 14px;
-        border-radius: 8px;
-    }
+    #topic { flex: 1.3; }
 }
 
 select:hover, button:hover {
@@ -278,10 +237,10 @@ select:hover, button:hover {
 
 #arena {
     position: relative;
-    flex-grow: 1; /* Automatically consumes exactly what is left of viewport height */
+    flex-grow: 1;
     width: 100%;
     overflow: hidden;
-    background: radial-gradient(circle at center, rgba(163, 239, 254, 0.344) 0%, var(--bg) 100%);
+    background: radial-gradient(circle at center, rgba(163, 239, 254, 0.15) 0%, var(--bg) 100%);
 }
 
 .formula {
@@ -295,15 +254,14 @@ select:hover, button:hover {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-    transition: transform 0.1s ease, background 0.2s ease;
+    transition: transform 0.2s ease, background 0.2s ease;
     white-space: nowrap;
 }
 
 @media (min-width: 768px) {
     .formula {
-        padding: 12px 20px;
-        font-size: 16px;
-        border-radius: 12px;
+        padding: 10px 18px;
+        font-size: 15px;
     }
 }
 
@@ -313,7 +271,7 @@ body.light-theme .formula {
 }
 
 .formula:hover {
-    transform: scale(1.08);
+    transform: scale(1.05);
     z-index: 10;
 }
 
@@ -326,13 +284,10 @@ body.light-theme .formula {
     text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
-#aboutModal, #gameOverModal {
+#aboutModal, #gameOverModal, #victoryModal {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(4px);
     justify-content: center;
@@ -340,7 +295,7 @@ body.light-theme .formula {
     z-index: 20000;
 }
 
-#aboutCard, #gameOverCard {
+#aboutCard, #gameOverCard, #victoryCard {
     background: var(--card);
     border: 1px solid var(--border);
     color: var(--text);
@@ -352,10 +307,10 @@ body.light-theme .formula {
     box-sizing: border-box;
 }
 
-#gameOverCard {
-    text-align: center;
-    border-top: 4px solid var(--danger);
-}
+#gameOverCard { border-top: 4px solid var(--danger); text-align: center; }
+#victoryCard { border-top: 4px solid var(--accent); text-align: center; }
+#victoryCard h1 { color: var(--accent); margin-top: 0; font-size: 24px; }
+#victoryPlayAgainBtn { width: 100%; padding: 12px; border: none; background: var(--primary); color: white; }
 
 .hidden-control {
     display: none !important;
@@ -364,6 +319,9 @@ body.light-theme .formula {
 </head>
 
 <body>
+<script>
+    if(localStorage.getItem("theme") === "light"){ document.body.classList.add("light-theme"); }
+</script>
 
 <div id="aboutModal">
     <div id="aboutCard">
@@ -383,9 +341,15 @@ body.light-theme .formula {
 </div>
 
 <div id="top">
-    <div class="action-left">
-        <button id="aboutBtn">ℹ️ About</button>
-        <button id="themeToggle">☀️ Light</button>
+    <div class="header-actions-wrap">
+        <div class="action-left">
+            <button onclick="window.location.href='formulae.html'">📚 Formula DIrectory</button>
+        </div>
+        
+        <div class="action-right">
+            <button id="aboutBtn">ℹ️</button>
+            <button id="themeToggle">☀️</button>
+        </div>
     </div>
     
     <div id="question-container">
@@ -396,24 +360,24 @@ body.light-theme .formula {
     <div id="controls">
         <div class="btn-group">
             <select id="level">
+                <option value="" disabled selected hidden>Level</option>
                 <option value="Beginner">Beginner</option>
                 <option value="Advanced">Advanced</option>
             </select>
             <select id="subject">
-                <option value="All">All</option>
+                <option value="" disabled selected hidden>Subject</option>
                 <option value="Physics">Physics</option>
                 <option value="Chemistry">Chem</option>
                 <option value="Maths">Maths</option>
             </select>
             <select id="topic">
+                <option value="" disabled selected hidden>Topic</option>
                 <option value="All">All Topics</option>
             </select>
             
             <button id="startBtn">Start</button>
             <button id="skipBtn" class="hidden-control">Skip</button>
             <button id="restartBtn" class="hidden-control">Restart</button>
-
-            <button onclick="window.location.href='formulae.html'">📚 Formulas</button>
         </div>
         <div class="stats-row">
             <div>Score: <span id="score">0</span></div>
@@ -434,15 +398,12 @@ body.light-theme .formula {
         <button id="playAgainBtn" style="width:100%; padding:12px; background:var(--primary); border:none; color:white;">Play Again</button>
     </div>
 </div>
+
 <div id="victoryModal">
     <div id="victoryCard">
         <h1>Formula Hunt Complete! 🏆</h1>
-
         <div id="victoryStats"></div>
-
-        <button id="victoryPlayAgainBtn">
-            Play Again
-        </button>
+        <button id="victoryPlayAgainBtn">Play Again</button>
     </div>
 </div>
 
@@ -450,20 +411,12 @@ body.light-theme .formula {
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
-  // Disable right-click context menu
   document.addEventListener('contextmenu', event => event.preventDefault());
 
-  // Block common DevTools keyboard shortcuts
   document.addEventListener('keydown', event => {
-    if (event.key === 'F12') {
-      event.preventDefault();
-    }
-    if (event.ctrlKey && event.shiftKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) {
-      event.preventDefault();
-    }
-    if (event.metaKey && event.altKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) {
-      event.preventDefault();
-    }
+    if (event.key === 'F12') { event.preventDefault(); }
+    if (event.ctrlKey && event.shiftKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) { event.preventDefault(); }
+    if (event.metaKey && event.altKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) { event.preventDefault(); }
   });
 
   const praise = ["Well Done!", "Awesome!", "Great!", "Excellent!", "Superb!", "Brilliant!", "Keep Going!", "Genius!", "Unstoppable!"];
@@ -472,7 +425,6 @@ window.addEventListener('DOMContentLoaded', () => {
   let current = 0, solved = 0, score = 0, combo = 0, lives = 3, skippedCount = 0;
   let pool = [], gameActive = false, gamePaused = false, velocityMultiplier = 1.0, levelScoreFactor = 1.0, displayPool = [];
   
-  // Set lower max pooling bound natively on tiny mobile screen trackers
   const maxVisible = window.innerWidth < 768 ? 10 : 20;
 
   const arena = document.getElementById("arena");
@@ -496,24 +448,23 @@ window.addEventListener('DOMContentLoaded', () => {
   const victoryStats = document.getElementById("victoryStats");
   const victoryPlayAgainBtn = document.getElementById("victoryPlayAgainBtn");
 
-victoryPlayAgainBtn.onclick = () => {
-    victoryModal.style.display = "none";
-    resetGame();
-};
+  victoryPlayAgainBtn.onclick = () => {
+      victoryModal.style.display = "none";
+      resetGame();
+  };
 
-  if(localStorage.getItem("theme") === "light"){
-      document.body.classList.add("light-theme");
-      themeBtn.textContent = "🌙 Dark";
+  if(document.body.classList.contains("light-theme")){
+      themeBtn.textContent = "🌙";
   }
 
   themeBtn.onclick = () => {
       document.body.classList.toggle("light-theme");
       if(document.body.classList.contains("light-theme")){
           localStorage.setItem("theme", "light");
-          themeBtn.textContent = "🌙 Dark";
+          themeBtn.textContent = "🌙";
       }else{
           localStorage.setItem("theme", "dark");
-          themeBtn.textContent = "☀️ Light";
+          themeBtn.textContent = "☀️";
       }
   };
 
@@ -523,8 +474,8 @@ victoryPlayAgainBtn.onclick = () => {
 
   function updateTopics() {
       const subject = subjectSelect.value;
-      topicSelect.innerHTML = '<option value="All">All Topics</option>';
-      if(subject === "All") return;
+      topicSelect.innerHTML = '<option value="" disabled selected hidden>Topic</option><option value="All">All Topics</option>';
+      if(subject === "" || subject === "All") return;
       const topics = new Set();
       bank.forEach(item => { if(item.subject === subject) topics.add(item.topic); });
       [...topics].forEach(topic => {
@@ -571,31 +522,24 @@ victoryPlayAgainBtn.onclick = () => {
   }
 
   function showVictory() {
-
     gameActive = false;
     gamePaused = false;
-
     victoryStats.innerHTML = `
-        <div style="font-size:18px;line-height:2;">
+        <div style="font-size:16px;line-height:1.8;">
             Final Score: <b>${score}</b><br>
             Solved: <b>${solved}</b><br>
             Skipped: <b>${skippedCount}</b><br>
             Remaining Lives: <b>${lives}</b><br>
             Best Combo: <b>${combo}</b>
         </div>
-
-        <div style="margin-top:20px;font-size:15px;color:var(--accent);">
+        <div style="margin-top:15px;font-size:14px;color:var(--accent);">
             🎉 Congratulations! <br>
             You successfully hunted every formula! 
-            <br>
-            <br>
         </div>
     `;
-
     victoryModal.style.display = "flex";
-
     play(500,1200,0.4);
-}
+  }
 
   function spawnFormula(item) {
     if (!item) return;
@@ -605,13 +549,8 @@ victoryPlayAgainBtn.onclick = () => {
     e.dataset.answer = item.a;
     const c = colors[Math.floor(Math.random() * colors.length)];
     
-    if(document.body.classList.contains("light-theme")){
-        e.style.color = c;
-        e.style.border = "1px solid " + c;
-    } else {
-        e.style.color = c;
-        e.style.border = "1px solid " + c;
-    }
+    e.style.color = c;
+    e.style.border = "1px solid " + c;
     
     e.style.left = Math.max(10, Math.random() * (window.innerWidth - 160)) + "px";
     e.style.top = Math.max(10, Math.random() * (arena.clientHeight - 50)) + "px";
@@ -622,6 +561,22 @@ victoryPlayAgainBtn.onclick = () => {
   }
 
   function startGame() {
+    const chosenLevel = levelSelect.value;
+    const chosenSub = subjectSelect.value;
+    const chosenTopic = topicSelect.value;
+
+    // Check if any of the dropdowns are still on their placeholders
+    if (!chosenLevel || !chosenSub || !chosenTopic) {
+      let missing = [];
+      if (!chosenLevel) missing.push("Level");
+      if (!chosenSub) missing.push("Subject");
+      if (!chosenTopic) missing.push("Topic");
+
+      question.innerHTML = `Please select a ${missing.join(", ")}!`;
+      question.style.color = "var(--danger)";
+      return;
+    }
+
     setViewState(true);
     arena.innerHTML = "";
     score = 0; combo = 0; current = 0; solved = 0;
@@ -630,19 +585,15 @@ victoryPlayAgainBtn.onclick = () => {
     scoreEl.innerText = score; comboEl.innerText = combo; skippedEl.innerText = skippedCount;
     gameActive = true;
 
-    const chosenLevel = levelSelect.value;
-    const chosenSub = subjectSelect.value;
-	const chosenTopic = topicSelect.value;
-
-	displayPool = bank.filter(x => {
-        return (chosenSub === "All" || x.subject === chosenSub) && x.level.includes(chosenLevel);
-	}).sort(() => Math.random() - 0.5);
+    displayPool = bank.filter(x => {
+        return (x.subject === chosenSub) && x.level.includes(chosenLevel);
+    }).sort(() => Math.random() - 0.5);
 
     if (chosenLevel === "Beginner") { velocityMultiplier = 0.8; levelScoreFactor = 0.8; }
-	else { velocityMultiplier = 1.8; levelScoreFactor = 1.5; }
+    else { velocityMultiplier = 1.8; levelScoreFactor = 1.5; }
     
     pool = bank.filter(x => {
-        return (chosenSub === "All" || x.subject === chosenSub) && 
+        return (x.subject === chosenSub) && 
                x.level.includes(chosenLevel) && 
                (chosenTopic === "All" || x.topic === chosenTopic);
     }).sort(() => Math.random() - 0.5);
@@ -665,29 +616,25 @@ victoryPlayAgainBtn.onclick = () => {
     nextQuestion();
     play(500, 900, 0.15); 
   }
-
+  
   function nextQuestion() {
     if (current >= pool.length) {
-    progress.style.width = "100%";
-    done.innerText = solved + "/" + pool.length;
-    setViewState(false);
-    showVictory();
-    return;
+      progress.style.width = "100%";
+      done.innerText = solved + "/" + pool.length;
+      setViewState(false);
+      showVictory();
+      return;
     }
     question.innerHTML = pool[current].q;
-
+    question.style.color = "var(--text)";
     const correctAns = pool[current].a;
+    const exists = [...document.querySelectorAll(".formula")].some(f => f.dataset.answer === correctAns);
 
-    const exists = [...document.querySelectorAll(".formula")]
-        .some(f => f.dataset.answer === correctAns);
-
-    if (!exists) {
-        spawnFormula(pool[current]);
-    }
+    if (!exists) { spawnFormula(pool[current]); }
 
     done.innerText = solved + "/" + pool.length;
     progress.style.width = ((solved / pool.length) * 100) + "%";
-}
+  }
 
   function handleClick(ev, el) {
     if(!gameActive || gamePaused || current >= pool.length) return;
@@ -745,8 +692,13 @@ victoryPlayAgainBtn.onclick = () => {
     scoreEl.innerText = "0"; comboEl.innerText = "0"; skippedEl.innerText = "0";
     progress.style.width = "0%"; done.innerText = "0/0";
     question.innerHTML = "Press Start to Hunt!";
+    question.style.color = "var(--text)";
     startBtn.textContent = "Start Game";
     gameOverModal.style.display = "none";
+    
+    levelSelect.value = "";
+    subjectSelect.value = "";
+    topicSelect.innerHTML = '<option value="" disabled selected hidden>Topic</option><option value="All">All Topics</option>';
   }
 
   function gameOver(){
@@ -803,6 +755,7 @@ victoryPlayAgainBtn.onclick = () => {
         const elements = document.querySelectorAll(".formula");
         const arenaWidth = arena.clientWidth;
         const arenaHeight = arena.clientHeight;
+        
         elements.forEach(el => {
           let x = parseFloat(el.style.left) || 0;
           let y = parseFloat(el.style.top) || 0;
@@ -813,6 +766,56 @@ victoryPlayAgainBtn.onclick = () => {
           else if (y + el.offsetHeight >= arenaHeight) { y = arenaHeight - el.offsetHeight; el.vy *= -1; }
           el.style.left = x + "px"; el.style.top = y + "px";
         });
+
+        for (let i = 0; i < elements.length; i++) {
+            for (let j = i + 1; j < elements.length; j++) {
+                const el1 = elements[i];
+                const el2 = elements[j];
+
+                const r1 = {
+                    left: parseFloat(el1.style.left) || 0,
+                    top: parseFloat(el1.style.top) || 0,
+                    right: (parseFloat(el1.style.left) || 0) + el1.offsetWidth,
+                    bottom: (parseFloat(el1.style.top) || 0) + el1.offsetHeight
+                };
+
+                const r2 = {
+                    left: parseFloat(el2.style.left) || 0,
+                    top: parseFloat(el2.style.top) || 0,
+                    right: (parseFloat(el2.style.left) || 0) + el2.offsetWidth,
+                    bottom: (parseFloat(el2.style.top) || 0) + el2.offsetHeight
+                };
+
+                if (r1.left < r2.right && r1.right > r2.left && r1.top < r2.bottom && r1.bottom > r2.top) {
+                    const overlapX = Math.min(r1.right, r2.right) - Math.max(r1.left, r2.left);
+                    const overlapY = Math.min(r1.bottom, r2.bottom) - Math.max(r1.top, r2.top);
+
+                    if (overlapX < overlapY) {
+                        if (r1.left < r2.left) {
+                            el1.style.left = (r1.left - overlapX / 2) + "px";
+                            el2.style.left = (r2.left + overlapX / 2) + "px";
+                        } else {
+                            el1.style.left = (r1.left + overlapX / 2) + "px";
+                            el2.style.left = (r2.left - overlapX / 2) + "px";
+                        }
+                        let tempVx = el1.vx;
+                        el1.vx = el2.vx;
+                        el2.vx = tempVx;
+                    } else {
+                        if (r1.top < r2.top) {
+                            el1.style.top = (r1.top - overlapY / 2) + "px";
+                            el2.style.top = (r2.top + overlapY / 2) + "px";
+                        } else {
+                            el1.style.top = (r1.top + overlapY / 2) + "px";
+                            el2.style.top = (r2.top - overlapY / 2) + "px";
+                        }
+                        let tempVy = el1.vy;
+                        el1.vy = el2.vy;
+                        el2.vy = tempVy;
+                    }
+                }
+            }
+        }
     }
     requestAnimationFrame(animate);
   }

@@ -11,165 +11,249 @@
     --text: #f8fafc;
     --header: #111827;
     --card: #1e293b;
-    --border: #334155;
+    --border: #1e293b;
     --accent: #10b981;
     --primary: #3b82f6;
-    --topic-bg: #2e1065;
+    --danger: #ef4444;
     --topic-active: #d946ef;
-    --topic-border: #701a75;
 }
 
 body.light-theme {
-    --bg: #f8fafc;
+    --bg: #f1f5f9;
     --text: #0f172a;
     --header: #ffffff;
     --card: #ffffff;
     --border: #cbd5e1;
     --accent: #059669;
     --primary: #2563eb;
-    --topic-bg: #fdf4ff;
+    --danger: #dc2626;
     --topic-active: #c026d3;
-    --topic-border: #f5d0fe;
 }
 
 body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 #top {
+    flex-shrink: 0;
     background: var(--header);
-    padding: 16px 20px;
+    padding: 8px 12px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
+    gap: 8px;
     border-bottom: 1px solid var(--border);
-}
-
-.back-btn {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
     width: 100%;
-    text-align: center;
 }
 
 @media (min-width: 768px) {
     #top {
-        padding: 16px 32px;
-        flex-direction: row;
-        justify-content: space-between;
+        padding: 10px 20px;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
         align-items: center;
+        gap: 16px;
     }
-    .back-btn {
-        width: auto;
+}
+
+.header-actions-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .header-actions-wrap {
+        display: contents;
+    }
+}
+
+.action-left {
+    display: flex;
+    gap: 8px;
+    order: 1;
+}
+
+.action-right {
+    display: flex;
+    gap: 8px;
+    order: 2;
+}
+
+@media (min-width: 768px) {
+    .action-left { order: 1; }
+    .action-right { order: 3; }
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    order: 3;
+}
+
+@media (min-width: 768px) {
+    .title-container {
+        order: 2;
     }
 }
 
 .title {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 700;
-    color: var(--accent);
+    line-height: 1.2;
+    color: var(--text);
 }
 
 @media (min-width: 768px) {
-    .title {
-        font-size: 24px;
-    }
+    .title { font-size: 18px; }
 }
-
-button {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: opacity 0.2s;
-}
-
-button:hover { opacity: 0.9; }
 
 .container {
-    padding: 16px;
+    padding: 12px;
     max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    flex-grow: 1;
 }
 
 @media (min-width: 768px) {
-    .container {
-        padding: 32px;
+    .container { padding: 20px; }
+}
+
+.tabs-row-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    order: 4;
+}
+
+@media (min-width: 768px) {
+    .tabs-row-container {
+        grid-column: 1 / span 3;
+        margin-top: 2px;
     }
 }
 
 .tabs {
     display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 4px;
-}
-
-.tabs::-webkit-scrollbar, .topic-tabs-container::-webkit-scrollbar {
-    display: none;
-}
-
-.tab-btn {
-    background: var(--card);
-    color: var(--text);
-    border: 1px solid var(--border);
-    padding: 10px 18px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    flex-shrink: 0;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
-    .tab-btn {
-        padding: 12px 24px;
-    }
+    .tabs { gap: 8px; }
 }
 
-.tab-btn.active {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-}
-
-.topic-tabs-container {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    background: rgba(0, 0, 0, 0.15);
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-}
-
-body.light-theme .topic-tabs-container {
-    background: #f1f5f9;
-}
-
-.topic-btn {
+select, button {
     background: var(--card);
     color: var(--text);
     border: 1px solid var(--border);
-    padding: 6px 14px;
-    border-radius: 20px;
+    padding: 6px 10px;
+    border-radius: 6px;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    outline: none;
+    white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+    .tabs button {
+        flex: 1;
+        min-width: 0;
+        text-align: center;
+        padding: 6px 4px;
+        font-size: 11px;
+    }
+}
+
+select:hover, button:hover {
+    background: rgba(51, 65, 85, 0.2);
+    border-color: #64748b;
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+.tab-btn.active:hover {
+    background: #60a5fa;
+    border-color: #60a5fa;
+}
+
+.topic-scroll-wrapper {
+    position: relative;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+/* Horizontal linear-gradient mask to provide clear scroll affordance on mobile screens */
+.topic-scroll-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 30px;
+    background: linear-gradient(90deg, transparent, var(--bg));
+    pointer-events: none;
+    transition: background 0.2s ease;
+}
+
+.topic-tabs-container {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 30px 8px 0;
+    box-sizing: border-box;
+}
+
+.topic-tabs-container::-webkit-scrollbar {
+    height: 4px;
+}
+.topic-tabs-container::-webkit-scrollbar-thumb {
+    background: rgba(100, 116, 139, 0.4);
+    border-radius: 4px;
+}
+
+.topic-btn {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
     flex-shrink: 0;
+}
+
+
+
+body.light-theme .topic-btn {
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .topic-btn:hover {
@@ -183,6 +267,12 @@ body.light-theme .topic-tabs-container {
     border-color: var(--topic-active);
     box-shadow: 0 4px 12px rgba(217, 70, 239, 0.25);
 }
+/* Force active pill text color to remain white in light theme */
+body.light-theme .topic-btn.active {
+    color: #ffffff !important;
+    background: var(--topic-active);
+    border-color: var(--topic-active);
+}
 
 .qrc-grid {
     display: none;
@@ -190,29 +280,40 @@ body.light-theme .topic-tabs-container {
     gap: 16px;
 }
 
+@media (min-width: 768px) {
+    .qrc-grid { gap: 20px; }
+}
+
 .qrc-grid.active { display: grid; }
 
 .qrc-card {
-    background: var(--card);
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid var(--border);
     padding: 16px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     gap: 12px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
-@media (min-width: 768px) {
-    .qrc-card {
-        padding: 20px;
-        gap: 12px;
-    }
+body.light-theme .qrc-card {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.qrc-card:hover {
+    transform: translateY(-2px);
+    border-color: #64748b;
 }
 
 .qrc-q {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
+    line-height: 1.3;
 }
 
 .tags-row {
@@ -222,47 +323,53 @@ body.light-theme .topic-tabs-container {
 }
 
 .qrc-tag {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 4px 8px;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
     border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.topic-tag { background: rgba(217, 70, 239, 0.15); color: #f5d0fe; }
-.level-tag { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
-body.light-theme .topic-tag { background: #fdf4ff; color: #a21caf; }
-body.light-theme .level-tag { background: #dbeafe; color: #1d4ed8; }
+.topic-tag { background: rgba(217, 70, 239, 0.15); color: #f5d0fe; border: 1px solid rgba(217, 70, 239, 0.3); }
+.level-tag { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+body.light-theme .topic-tag { background: #fdf4ff; color: #a21caf; border: 1px solid #f5d0fe; }
+body.light-theme .level-tag { background: #dbeafe; color: #1d4ed8; border: 1px solid #cbd5e1; }
 
 .qrc-a {
-    font-size: 16px;
-    color: var(--primary);
+    font-size: 15px;
+    color: var(--accent);
     font-weight: 700;
     background: rgba(0, 0, 0, 0.15);
-    padding: 12px;
+    padding: 10px 12px;
     border-radius: 8px;
-    border-left: 4px solid var(--primary);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
     overflow-x: auto;
+    white-space: nowrap;
 }
 
 body.light-theme .qrc-a { background: #f1f5f9; }
 
 .example-btn {
-    background: transparent;
+    background: var(--card);
     color: var(--text);
     border: 1px solid var(--border);
-    padding: 8px 12px;
-    font-size: 13px;
+    padding: 6px 12px;
+    font-size: 12px;
     border-radius: 6px;
     cursor: pointer;
+    text-align: center;
 }
 
 .example-box {
-    padding: 12px;
+    padding: 10px 12px;
     background: rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: 12px;
+    line-height: 1.4;
     color: #94a3b8;
+    border: 1px dashed var(--border);
 }
 
 body.light-theme .example-box { background: #f8fafc; color: #475569; }
@@ -270,23 +377,38 @@ body.light-theme .example-box { background: #f8fafc; color: #475569; }
 </head>
 
 <body>
+<script>
+    if(localStorage.getItem("theme") === "light"){ document.body.classList.add("light-theme"); }
+</script>
 
 <div id="top">
-    <div style="display:flex; gap:12px; align-items:center; width: 100%; justify-content: space-between;">
-        <div class="title">📚 Formula Directory</div>
-        <button id="themeToggle" style="background:transparent; color:var(--text); border:1px solid var(--border); padding:6px 12px;">☀️ Light</button>
+    <div class="header-actions-wrap">
+        <div class="action-left">
+            <button class="back-btn" onclick="window.location.href='index.html'">← Game</button>
+        </div>
+        
+        <div class="action-right">
+            <button id="themeToggle">☀️</button>
+        </div>
     </div>
-    <button class="back-btn" onclick="window.location.href='index.html'">← Back to Game</button>
+    
+    <div class="title-container">
+        <div class="title">📚 Formula Directory</div>
+    </div>
+
+    <div class="tabs-row-container">
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event,'physics')">Physics</button>
+            <button class="tab-btn" onclick="switchTab(event,'chemistry')">Chemistry</button>
+            <button class="tab-btn" onclick="switchTab(event,'maths')">Maths</button>
+        </div>
+    </div>
 </div>
 
 <div class="container">
-    <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab(event,'physics')">Physics</button>
-        <button class="tab-btn" onclick="switchTab(event,'chemistry')">Chemistry</button>
-        <button class="tab-btn" onclick="switchTab(event,'maths')">Mathematics</button>
+    <div class="topic-scroll-wrapper">
+        <div id="topicTabsContainer" class="topic-tabs-container"></div>
     </div>
-
-    <div id="topicTabsContainer" class="topic-tabs-container"></div>
 
     <div id="physics" class="qrc-grid active"></div>
     <div id="chemistry" class="qrc-grid"></div>
@@ -296,36 +418,27 @@ body.light-theme .example-box { background: #f8fafc; color: #475569; }
 <script src="data.js"></script>
 
 <script>
-// Disable right-click context menu
 document.addEventListener('contextmenu', event => event.preventDefault());
 
-// Block common DevTools keyboard shortcuts
 document.addEventListener('keydown', event => {
-  if (event.key === 'F12') {
-    event.preventDefault();
-  }
-  if (event.ctrlKey && event.shiftKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) {
-    event.preventDefault();
-  }
-  if (event.metaKey && event.altKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) {
-    event.preventDefault();
-  }
+  if (event.key === 'F12') { event.preventDefault(); }
+  if (event.ctrlKey && event.shiftKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) { event.preventDefault(); }
+  if (event.metaKey && event.altKey && ['I', 'J', 'C'].includes(event.key.toUpperCase())) { event.preventDefault(); }
 });
 
 const themeBtn = document.getElementById("themeToggle");
-if(localStorage.getItem("theme")==='light'){
-    document.body.classList.add("light-theme");
-    themeBtn.textContent="🌙 Dark";
+if(document.body.classList.contains("light-theme")){
+    themeBtn.textContent="🌙";
 }
 
 themeBtn.onclick=()=>{
     document.body.classList.toggle("light-theme");
     if(document.body.classList.contains("light-theme")){
         localStorage.setItem("theme","light");
-        themeBtn.textContent="🌙 Dark";
+        themeBtn.textContent="🌙";
     }else{
         localStorage.setItem("theme","dark");
-        themeBtn.textContent="☀️ Light";
+        themeBtn.textContent="☀️";
     }
 };
 
